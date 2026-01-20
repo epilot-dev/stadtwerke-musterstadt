@@ -1,22 +1,25 @@
-import React from "react";
-import { PiggyBank, Leaf, Smartphone } from "lucide-react";
+import React from 'react';
+import { PiggyBank, Leaf, Smartphone } from 'lucide-react';
 
 const features = [
   {
     icon: PiggyBank,
-    title: "Fair & Transparent.",
-    description: "Keine versteckten Kosten, keine fiesen Tricks. Dein Tarif, der zu deinem Leben passt. Monatlich kündbar? Klar doch."
+    title: 'Fair & Transparent.',
+    description:
+      'Keine versteckten Kosten, keine fiesen Tricks. Dein Tarif, der zu deinem Leben passt. Monatlich kündbar? Klar doch.',
   },
   {
     icon: Leaf,
-    title: "100% Öko? Logisch.",
-    description: "Unser Strom kommt aus Sonne, Wind und Wasser. Null CO₂, null Atom, null Ausreden. So geht Energiewende heute."
+    title: '100% Öko? Logisch.',
+    description:
+      'Unser Strom kommt aus Sonne, Wind und Wasser. Null CO₂, null Atom, null Ausreden. So geht Energiewende heute.',
   },
   {
     icon: Smartphone,
-    title: "Deine Energie to go.",
-    description: "Alles in einer App. Zählerstand scannen, Abschlag ändern, Umzug melden. Papierkram war gestern."
-  }
+    title: 'Deine Energie to go.',
+    description:
+      'Alles in einer App. Zählerstand scannen, Abschlag ändern, Umzug melden. Papierkram war gestern.',
+  },
 ];
 
 export function Features() {
@@ -25,7 +28,8 @@ export function Features() {
       <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-[#222222] mb-6">
-            Mehr als nur Versorgung.<br />
+            Mehr als nur Versorgung.
+            <br />
             Energie, die Bock macht.
           </h2>
         </div>
@@ -44,17 +48,14 @@ export function Features() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#222222] mb-4">
-                  {feature.title}
-                </h3>
+                <h3 className="text-2xl font-bold text-[#222222] mb-4">{feature.title}</h3>
 
                 <p className="text-gray-600 leading-relaxed max-w-sm mx-auto">
                   {feature.description}
                 </p>
               </div>
-            )
-          }
-          )}
+            );
+          })}
         </div>
       </div>
     </section>

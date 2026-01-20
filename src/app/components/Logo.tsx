@@ -1,17 +1,17 @@
-import React from "react";
-import svgPathsOld from "../../imports/svg-76k4j86d97";
-import svgPathsNew from "../../imports/svg-c9erwtfqhn";
+import React from 'react';
+import svgPathsOld from '../../imports/svg-76k4j86d97';
+import svgPathsNew from '../../imports/svg-c9erwtfqhn';
 
 interface LogoProps {
-  variant?: "light" | "dark";
+  variant?: 'light' | 'dark';
   className?: string;
 }
 
-export function Logo({ variant = "dark", className = "" }: LogoProps) {
+export function Logo({ variant = 'dark', className = '' }: LogoProps) {
   // Use the old logo (with neon yellow accent) for dark variant (navbar)
   // Use the new logo (single color) for light variant (footer)
-  
-  if (variant === "light") {
+
+  if (variant === 'light') {
     // Footer version - simple white logo
     return (
       <div className={`relative ${className}`}>
@@ -29,8 +29,8 @@ export function Logo({ variant = "dark", className = "" }: LogoProps) {
   }
 
   // Navbar version - dark with neon yellow accent
-  const mainColor = "#222222";
-  const accentColor = "#DEFF03";
+  const mainColor = '#222222';
+  const accentColor = '#DEFF03';
 
   return (
     <div className={`relative ${className}`}>
@@ -43,11 +43,11 @@ export function Logo({ variant = "dark", className = "" }: LogoProps) {
       >
         <g id="Union">
           <path d={svgPathsOld.pd92ae00} fill={mainColor} />
-          <path 
-            clipRule="evenodd" 
-            d={svgPathsOld.p3ee1ba00} 
-            fill={accentColor} 
-            fillRule="evenodd" 
+          <path
+            clipRule="evenodd"
+            d={svgPathsOld.p3ee1ba00}
+            fill={accentColor}
+            fillRule="evenodd"
           />
         </g>
       </svg>

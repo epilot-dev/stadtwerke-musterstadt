@@ -1,12 +1,20 @@
-import svgPaths from "./svg-gx1gh4ostq";
-import React from "react";
+import svgPaths from './svg-gx1gh4ostq';
+import React from 'react';
 
 function WaterEc() {
   return (
     <div className="absolute left-[94px] size-[78px] top-[111px]" data-name="water_ec">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 78 78">
         <g id="water_ec">
-          <mask height="78" id="mask0_1_42" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="78" x="0" y="0">
+          <mask
+            height="78"
+            id="mask0_1_42"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: 'alpha' }}
+            width="78"
+            x="0"
+            y="0"
+          >
             <rect fill="var(--fill-0, #D9D9D9)" height="78" id="Bounding box" width="78" />
           </mask>
           <g mask="url(#mask0_1_42)">
@@ -22,7 +30,9 @@ function Logo() {
   return (
     <div className="absolute contents left-[94px] top-[111px]" data-name="Logo">
       <div className="absolute flex flex-col font-['Proxima_Nova:Bold',sans-serif] justify-center leading-[normal] left-[182px] not-italic text-[32px] text-white top-[150px] translate-y-[-50%] uppercase whitespace-nowrap whitespace-pre">
-        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">Stadtwerke</p>
+        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">
+          Stadtwerke
+        </p>
         <p className="tracking-[-0.08px]">Musterstadt</p>
       </div>
       <WaterEc />
@@ -35,7 +45,15 @@ function WaterEc1() {
     <div className="absolute left-[594px] size-[78px] top-[111px]" data-name="water_ec">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 78 78">
         <g id="water_ec">
-          <mask height="78" id="mask0_1_42" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="78" x="0" y="0">
+          <mask
+            height="78"
+            id="mask0_1_42"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: 'alpha' }}
+            width="78"
+            x="0"
+            y="0"
+          >
             <rect fill="var(--fill-0, #D9D9D9)" height="78" id="Bounding box" width="78" />
           </mask>
           <g mask="url(#mask0_1_42)">
@@ -51,7 +69,9 @@ function Logo1() {
   return (
     <div className="absolute contents left-[594px] top-[111px]" data-name="Logo">
       <div className="absolute flex flex-col font-['Proxima_Nova:Bold',sans-serif] justify-center leading-[normal] left-[682px] not-italic text-[32px] text-white top-[150px] translate-y-[-50%] uppercase whitespace-nowrap whitespace-pre">
-        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">Stadtwerke</p>
+        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">
+          Stadtwerke
+        </p>
         <p className="tracking-[-0.08px]">Musterstadt</p>
       </div>
       <WaterEc1 />
@@ -64,7 +84,15 @@ function WaterEc2() {
     <div className="absolute left-[594px] size-[78px] top-[411px]" data-name="water_ec">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 78 78">
         <g id="water_ec">
-          <mask height="78" id="mask0_1_38" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="78" x="0" y="0">
+          <mask
+            height="78"
+            id="mask0_1_38"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: 'alpha' }}
+            width="78"
+            x="0"
+            y="0"
+          >
             <rect fill="var(--fill-0, #D9D9D9)" height="78" id="Bounding box" width="78" />
           </mask>
           <g mask="url(#mask0_1_38)">
@@ -80,7 +108,9 @@ function Logo2() {
   return (
     <div className="absolute contents left-[594px] top-[411px]" data-name="Logo">
       <div className="absolute flex flex-col font-['Proxima_Nova:Bold',sans-serif] justify-center leading-[normal] left-[682px] not-italic text-[#222] text-[32px] text-white top-[450px] translate-y-[-50%] uppercase whitespace-nowrap whitespace-pre">
-        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">Stadtwerke</p>
+        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">
+          Stadtwerke
+        </p>
         <p className="tracking-[-0.08px]">Musterstadt</p>
       </div>
       <WaterEc2 />
@@ -93,7 +123,15 @@ function WaterEc3() {
     <div className="absolute left-[94px] size-[78px] top-[407.76px]" data-name="water_ec">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 78 78">
         <g id="water_ec">
-          <mask height="78" id="mask0_1_38" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="78" x="0" y="0">
+          <mask
+            height="78"
+            id="mask0_1_38"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: 'alpha' }}
+            width="78"
+            x="0"
+            y="0"
+          >
             <rect fill="var(--fill-0, #D9D9D9)" height="78" id="Bounding box" width="78" />
           </mask>
           <g mask="url(#mask0_1_38)">
@@ -109,7 +147,9 @@ function Logo3() {
   return (
     <div className="absolute contents left-[94px] top-[407.76px]" data-name="Logo">
       <div className="absolute flex flex-col font-['Proxima_Nova:Bold',sans-serif] justify-center leading-[normal] left-[182px] not-italic text-[#222] text-[32px] text-white top-[446.76px] translate-y-[-50%] uppercase whitespace-nowrap whitespace-pre">
-        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">Stadtwerke</p>
+        <p className="font-['Proxima_Nova:Semibold',sans-serif] mb-0 tracking-[1.12px]">
+          Stadtwerke
+        </p>
         <p className="tracking-[-0.08px]">Musterstadt</p>
       </div>
       <WaterEc3 />

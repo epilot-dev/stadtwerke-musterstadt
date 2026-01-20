@@ -1,47 +1,47 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Logo } from "./Logo";
-import { Menu, X, User, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState, useEffect, useRef } from 'react';
+import { Logo } from './Logo';
+import { Menu, X, User, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Define the navigation structure
 const NAV_ITEMS = [
-  { name: "Ökostrom", href: "#" },
-  { 
-    name: "WärmeStrom & Gas", 
-    href: "#",
+  { name: 'Ökostrom', href: '#' },
+  {
+    name: 'WärmeStrom & Gas',
+    href: '#',
     subItems: [
-      { name: "Wärmestromtarife", href: "#" },
-      { name: "Wärmepumpe", href: "#" },
-      { name: "Gastarife", href: "#" },
-      { name: "Fernwärme", href: "#" },
-    ]
+      { name: 'Wärmestromtarife', href: '#' },
+      { name: 'Wärmepumpe', href: '#' },
+      { name: 'Gastarife', href: '#' },
+      { name: 'Fernwärme', href: '#' },
+    ],
   },
-  { 
-    name: "E-Mobilität", 
-    href: "#",
+  {
+    name: 'E-Mobilität',
+    href: '#',
     subItems: [
-      { name: "Ladestromtarife", href: "#" },
-      { name: "Wallbox", href: "#" },
-    ]
+      { name: 'Ladestromtarife', href: '#' },
+      { name: 'Wallbox', href: '#' },
+    ],
   },
-  { 
-    name: "Solar", 
-    href: "#",
+  {
+    name: 'Solar',
+    href: '#',
     subItems: [
-      { name: "Photovoltaik", href: "#" },
-      { name: "Balkonkraftwerke", href: "#" },
-    ]
+      { name: 'Photovoltaik', href: '#' },
+      { name: 'Balkonkraftwerke', href: '#' },
+    ],
   },
-  { name: "Netz", href: "#" },
-  { name: "Service", href: "#" },
-  { name: "Über uns", href: "#" },
+  { name: 'Netz', href: '#' },
+  { name: 'Service', href: '#' },
+  { name: 'Über uns', href: '#' },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  
+
   // Track which dropdown is open on desktop (for hover/click)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -64,8 +64,8 @@ export function Navbar() {
         lastScrollY.current = currentScrollY;
       }
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleMouseEnter = (name: string) => {
@@ -83,7 +83,8 @@ export function Navbar() {
     setMobileExpanded(mobileExpanded === name ? null : name);
   };
 
-  const baseLinkClass = "text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors flex items-center gap-2 cursor-pointer";
+  const baseLinkClass =
+    'text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors flex items-center gap-2 cursor-pointer';
   const standardLinkClass = `${baseLinkClass} hover:bg-[#deff03] hover:text-black`;
 
   return (
@@ -91,16 +92,16 @@ export function Navbar() {
       {/* Spacer to prevent content jump since Navbar is fixed */}
       <div className="h-16 xl:h-24 w-full bg-transparent" aria-hidden="true" />
 
-      <nav 
+      <nav
         className={`fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 shadow-sm ${
-          isScrolled ? "h-16" : "h-16 xl:h-24"
+          isScrolled ? 'h-16' : 'h-16 xl:h-24'
         }`}
       >
         <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center justify-between">
-          <a 
-            href="/" 
+          <a
+            href="/"
             className={`flex items-center transition-all duration-300 ${
-              isScrolled ? "w-32" : "w-32 xl:w-48"
+              isScrolled ? 'w-32' : 'w-32 xl:w-48'
             }`}
           >
             <Logo variant="dark" />
@@ -109,8 +110,8 @@ export function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden xl:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
-              <div 
-                key={item.name} 
+              <div
+                key={item.name}
                 className="relative"
                 onMouseEnter={() => item.subItems && handleMouseEnter(item.name)}
                 onMouseLeave={() => item.subItems && handleMouseLeave()}
@@ -120,7 +121,11 @@ export function Navbar() {
                   className={`${standardLinkClass} ${activeDropdown === item.name ? 'bg-[#deff03] text-black' : ''}`}
                 >
                   {item.name}
-                  {item.subItems && <ChevronDown className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />}
+                  {item.subItems && (
+                    <ChevronDown
+                      className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`}
+                    />
+                  )}
                 </a>
 
                 {/* Desktop Dropdown */}
@@ -158,10 +163,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Toggle */}
-          <button
-            className="xl:hidden p-2 text-gray-700"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <button className="xl:hidden p-2 text-gray-700" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -171,21 +173,26 @@ export function Navbar() {
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
+              animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className="xl:hidden border-t border-gray-100 bg-white overflow-hidden shadow-lg max-h-[85vh] overflow-y-auto"
             >
               <div className="flex flex-col py-2">
                 {NAV_ITEMS.map((item) => (
-                  <div key={item.name} className="group relative border-b border-gray-50 last:border-0">
+                  <div
+                    key={item.name}
+                    className="group relative border-b border-gray-50 last:border-0"
+                  >
                     {/* Hover Bar - Neon Yellow */}
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-[#deff03] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                    
-                    <div 
+
+                    <div
                       className="flex items-center justify-between px-6 py-4 cursor-pointer"
-                      onClick={() => item.subItems ? toggleMobileSubmenu(item.name) : setIsOpen(false)}
+                      onClick={() =>
+                        item.subItems ? toggleMobileSubmenu(item.name) : setIsOpen(false)
+                      }
                     >
-                      <a 
+                      <a
                         href={item.href}
                         className="text-lg font-medium text-gray-900"
                         onClick={(e) => {
@@ -195,17 +202,19 @@ export function Navbar() {
                         {item.name}
                       </a>
                       {item.subItems && (
-                        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === item.name ? 'rotate-180' : ''}`} />
+                        <ChevronDown
+                          className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === item.name ? 'rotate-180' : ''}`}
+                        />
                       )}
                     </div>
-                    
+
                     {/* Mobile Submenu */}
                     {item.subItems && (
                       <AnimatePresence>
                         {mobileExpanded === item.name && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
+                            animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             className="bg-gray-50 overflow-hidden"
                           >
