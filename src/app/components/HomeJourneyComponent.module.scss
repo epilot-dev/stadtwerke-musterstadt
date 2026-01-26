@@ -1,14 +1,23 @@
 .container {
     max-height: 550px;
     overflow-y: auto;
+    position: relative;
+}
+
+.journeyWrapper {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease-in 0.1s, height 0s linear 0.4s;
 
     epilot-journey {
-        visibility: hidden;
-        opacity: 0;
+        display: block;
+    }
 
-        &:global(.journey-loaded) {
-            visibility: visible;
-            opacity: 1;
-        }
+    &.visible {
+        height: auto;
+        overflow: visible;
+        opacity: 1;
+        transition: opacity 0.4s ease-in 0.1s, height 0s linear 0s;
     }
 }
