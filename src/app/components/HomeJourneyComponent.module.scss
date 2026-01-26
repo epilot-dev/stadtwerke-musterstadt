@@ -1,0 +1,14 @@
+.container {
+    max-height: 550px;
+    overflow-y: auto;
+
+    epilot-journey {
+        visibility: hidden;
+        opacity: 0;
+
+        &:global(.journey-loaded) {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

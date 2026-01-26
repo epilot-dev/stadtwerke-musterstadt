@@ -1,8 +1,6 @@
-import React from 'react';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, Zap, Flame } from 'lucide-react';
+import HomeJourneyComponent from './HomeJourneyComponent';
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -55,38 +53,9 @@ export function Hero() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8"
+          className="w-full max-w-md bg-white rounded-3xl shadow-2xl"
         >
-          <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Tarif berechnen</h3>
-            <p className="text-gray-500">Finden Sie den passenden Tarif für Ihr Zuhause.</p>
-          </div>
-
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-full mb-4">
-              <button className="flex items-center justify-center gap-2 bg-white shadow-sm py-2 rounded-full text-sm font-bold text-gray-900">
-                <Zap className="w-4 h-4 text-[#deff03] fill-current" /> Strom
-              </button>
-              <button className="flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium text-gray-500 hover:text-gray-900">
-                <Flame className="w-4 h-4" /> Gas
-              </button>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Postleitzahl</label>
-              <Input placeholder="12345" className="h-12 rounded-xl border-gray-200 bg-gray-50" />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Verbrauch (kWh/Jahr)</label>
-              <Input placeholder="2500" className="h-12 rounded-xl border-gray-200 bg-gray-50" />
-            </div>
-
-            <Button className="w-full h-12 bg-[#222222] hover:bg-black text-white font-bold text-lg rounded-full mt-2 group">
-              Jetzt berechnen{' '}
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:text-[#deff03] transition-colors" />
-            </Button>
-          </div>
+          <HomeJourneyComponent journeyId="ae206570-f6a9-11f0-a0ca-4bf89ca038a5" />
         </motion.div>
       </div>
 
