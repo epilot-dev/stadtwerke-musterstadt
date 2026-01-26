@@ -55,7 +55,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="w-full max-w-md bg-white rounded-3xl shadow-2xl"
         >
-          <HomeJourneyComponent journeyId="ae206570-f6a9-11f0-a0ca-4bf89ca038a5" />
+          <HomeJourneyComponent journeyId="cc98b7b0-9363-11ee-bc35-45ee5da64d24" />
         </motion.div>
       </div>
 
