@@ -1,4 +1,3 @@
-import React from 'react';
 import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
 import { HeroSection } from '@/app/components/HeroSection';
@@ -37,7 +36,7 @@ export default function StromEinspeiser() {
                 title="Erzeugungs- und Verbrauchsanlagen anmelden"
                 description="Melden Sie Ihre Photovoltaikanlage, Wärmepumpe oder andere Anlagen schnell und einfach bei uns an."
                 icon={BatteryCharging}
-                href="https://grid.ecp.epilot.io/"
+                href="https://netz.ecp.epilot.io/"
                 cta="Jetzt anmelden"
                 variant="netz"
                 external={true}
@@ -47,7 +46,7 @@ export default function StromEinspeiser() {
                 title="Zählerstand mitteilen"
                 description="Teilen Sie uns Ihren aktuellen Zählerstand bequem online mit – einfach und sicher."
                 icon={LineChart}
-                href="https://grid.ecp.epilot.io/"
+                href="https://netz.ecp.epilot.io/"
                 cta="Zählerstand übermitteln"
                 variant="netz"
                 external={true}

@@ -1,14 +1,21 @@
 // TypeScript declaration for the custom element
 
 import { useEffect, useRef, useState } from 'react';
-import styles from './HomeJourneyComponent.module.scss';
+import styles from './JourneyComponent.module.scss';
 import { JourneySkeleton } from './JourneySkeleton';
+import { cn } from './ui/utils';
 
 type JourneyWebComponentProps = {
   journeyId: string;
+  mode?: 'inline' | 'full-screen';
+  className?: string;
 };
 
-const JourneyWebComponent = ({ journeyId }: JourneyWebComponentProps) => {
+const JourneyWebComponent = ({
+  journeyId,
+  mode = 'inline',
+  className,
+}: JourneyWebComponentProps) => {
   const journeyRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -29,7 +36,7 @@ const JourneyWebComponent = ({ journeyId }: JourneyWebComponentProps) => {
   }, [isLoaded]);
 
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container, className)}>
       {/* Skeleton loading state */}
       <JourneySkeleton isLoaded={isLoaded} />
 
@@ -37,7 +44,7 @@ const JourneyWebComponent = ({ journeyId }: JourneyWebComponentProps) => {
       <div className={`${styles.journeyWrapper} ${isLoaded ? styles.visible : ''}`}>
         <epilot-journey
           journey-id={journeyId}
-          mode="inline"
+          mode={mode}
           top-bar="false"
           lang="de"
           is-embedded="true"

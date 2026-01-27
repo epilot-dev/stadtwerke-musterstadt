@@ -1,4 +1,3 @@
-import React from 'react';
 import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
 import { HeroSection } from '@/app/components/HeroSection';
@@ -38,7 +37,7 @@ export default function WasserAnschluss() {
                 title="Wasserhausanschluss im Portal beantragen"
                 description="Beantragen Sie Ihren dauerhaften Wasserhausanschluss direkt online in unserem Kundenportal."
                 icon={Droplet}
-                href="https://grid.ecp.epilot.io/"
+                href="https://netz.ecp.epilot.io/"
                 cta="Zum Portal"
                 variant="netz"
                 external={true}
@@ -48,7 +47,7 @@ export default function WasserAnschluss() {
                 title="Bauwasser beantragen"
                 description="Für Ihre Baustelle benötigen Sie temporär Wasser? Beantragen Sie Bauwasser schnell und unkompliziert."
                 icon={Construction}
-                href="https://grid.ecp.epilot.io/"
+                href="https://netz.ecp.epilot.io/"
                 cta="Bauwasser beantragen"
                 variant="netz"
                 external={true}

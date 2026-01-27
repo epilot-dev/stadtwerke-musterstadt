@@ -24,7 +24,7 @@ const NETZ_NAV_ITEMS = [
       { name: 'Einspeiser und Verbraucher', href: '/netz/strom/einspeiser', icon: BatteryCharging },
       {
         name: 'Stromanschluss beantragen',
-        href: 'https://grid.ecp.epilot.io/',
+        href: 'https://netz.ecp.epilot.io/',
         external: true,
         icon: Zap,
       },
@@ -36,7 +36,7 @@ const NETZ_NAV_ITEMS = [
     subItems: [
       {
         name: 'Erdgasanschluss beantragen',
-        href: 'https://grid.ecp.epilot.io/',
+        href: 'https://netz.ecp.epilot.io/',
         external: true,
         icon: Flame,
       },
@@ -56,7 +56,7 @@ const NETZ_NAV_ITEMS = [
       { name: 'Verfügbarkeitscheck', href: '/netz/fernwarme/check', icon: ThermometerSun },
     ],
   },
-  { name: 'Service', href: '#' },
+  { name: 'Service', href: '/service' },
   { name: 'Für Installateure', href: 'https://installateur.ecp.epilot.io/', external: true },
 ];
 
@@ -64,7 +64,7 @@ export function NetzNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [selectedSegment, setSelectedSegment] = useState<'tarif' | 'netz'>('netz');
+  const [selectedSegment, setSelectedSegment] = useState<'vertrieb' | 'netz'>('netz');
 
   // Track which dropdown is open on desktop (for hover/click)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -131,25 +131,27 @@ export function NetzNavbar() {
                   />
                 </a>
 
-                {/* Segmented Control - Tarif & Netz */}
+                {/* Segmented Control - Vertrieb & Netz */}
                 <div className="hidden xl:flex items-center gap-0">
                   <Link
                     to="/"
                     className={`group relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
-                      selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
+                      selectedSegment === 'vertrieb'
+                        ? 'text-black'
+                        : 'text-gray-700 hover:text-black'
                     }`}
-                    onClick={() => setSelectedSegment('tarif')}
+                    onClick={() => setSelectedSegment('vertrieb')}
                   >
                     {/* Yellow accent bar - animates from bottom to top */}
                     <div
                       className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#deff03] transition-all duration-300 origin-bottom ${
-                        selectedSegment === 'tarif'
+                        selectedSegment === 'vertrieb'
                           ? 'scale-y-100 opacity-100'
                           : 'scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
                       }`}
                     />
                     <FileText className="w-4 h-4 relative z-10" />
-                    <span className="relative z-10">Tarif</span>
+                    <span className="relative z-10">Vertrieb</span>
                   </Link>
                   <button
                     className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
@@ -281,7 +283,7 @@ export function NetzNavbar() {
               <div className="hidden xl:flex items-center h-full gap-2 ml-auto">
                 {/* Netzkundenportal - direct link */}
                 <a
-                  href="https://grid.ecp.epilot.io/"
+                  href="https://netz.ecp.epilot.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={netzLinkClass}

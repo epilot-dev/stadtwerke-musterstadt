@@ -136,7 +136,7 @@ export const Navbar = () => {
                 </a>
 
                 {/* Segmented Control - Vertrieb & Netz */}
-                <div className="hidden xl:flex items-center gap-0">
+                <div className="flex items-center gap-0">
                   <button
                     className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
                       selectedSegment === 'vertrieb'
@@ -178,7 +178,7 @@ export const Navbar = () => {
               </div>
 
               {/* Über uns - Right aligned */}
-              <div className="hidden xl:block">
+              <div className="block">
                 <a
                   href="https://www.epilot.cloud/en/company/about"
                   target="_blank"

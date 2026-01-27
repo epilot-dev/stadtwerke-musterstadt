@@ -116,7 +116,7 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://grid.ecp.epilot.io/"
+                  href="https://netz.ecp.epilot.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#63BEF8] transition-colors"
@@ -126,7 +126,7 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://grid.ecp.epilot.io/"
+                  href="https://netz.ecp.epilot.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#63BEF8] transition-colors"

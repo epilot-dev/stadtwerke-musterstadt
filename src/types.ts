@@ -5,7 +5,7 @@ declare global {
       'epilot-journey': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & {
           'journey-id': string;
-          mode: 'inline';
+          mode: 'inline' | 'full-screen';
           'top-bar'?: string;
           lang?: 'en' | 'de';
           'is-embedded': string;

@@ -67,7 +67,7 @@ export default function FernwarmeCheck() {
                 title="Fernwärmeanschluss im Portal beantragen"
                 description="Stellen Sie Ihren Antrag für einen Fernwärmeanschluss bequem online in unserem Netzkundenportal. Alle erforderlichen Unterlagen können Sie direkt hochladen."
                 icon={ThermometerSun}
-                href="https://grid.ecp.epilot.io/"
+                href="https://netz.ecp.epilot.io/"
                 cta="Jetzt beantragen"
                 variant="netz"
                 external={true}

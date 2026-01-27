@@ -1,6 +1,6 @@
 import { Button } from './ui/button';
 import { motion, useScroll, useTransform } from 'motion/react';
-import HomeJourneyComponent from './HomeJourneyComponent';
+import JourneyComponent from './JourneyComponent';
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -8,7 +8,7 @@ export function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   return (
-    <section className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center bg-gray-900 overflow-hidden">
+    <section className="relative w-full min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gray-900 overflow-hidden">
       {/* Background Image with Parallax */}
       <motion.div className="absolute inset-0 z-0" style={{ y }}>
         <motion.img
@@ -55,7 +55,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="w-full max-w-md bg-white rounded-3xl shadow-2xl"
         >
-          <HomeJourneyComponent journeyId="ae206570-f6a9-11f0-a0ca-4bf89ca038a5" />
+          <JourneyComponent
+            journeyId="ae206570-f6a9-11f0-a0ca-4bf89ca038a5"
+            className="rounded-3xl"
+          />
         </motion.div>
       </div>
 

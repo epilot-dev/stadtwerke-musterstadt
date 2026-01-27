@@ -9,7 +9,7 @@ export function NetzHero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   return (
-    <section className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
+    <section className="relative w-full min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
       {/* Background Pattern */}
       <motion.div className="absolute inset-0 z-0 opacity-10" style={{ y }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,190,248,0.3),transparent_50%)]" />
