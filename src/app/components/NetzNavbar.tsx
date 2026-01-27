@@ -6,72 +6,69 @@ import {
   User,
   ChevronDown,
   Zap,
-  UserCircle,
-  Building2,
-  Leaf,
-  Flame,
+  Droplet,
   ThermometerSun,
   BatteryCharging,
-  Factory,
-  PlugZap,
-  Sun,
-  Heater,
+  Flame,
   FileText,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
-// Define the navigation structure
-const NAV_ITEMS = [
+// Define the Netz navigation structure
+const NETZ_NAV_ITEMS = [
   {
-    name: 'Strom & Gas',
+    name: 'Strom',
     href: '#',
     subItems: [
-      { name: 'Ökostrom', href: '/okostrom', icon: Leaf },
-      { name: 'Gas', href: '/gas', icon: Flame },
-      { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
-      { name: 'Ladestrom', href: '/ladestrom', icon: BatteryCharging },
+      { name: 'Einspeiser und Verbraucher', href: '/netz/strom/einspeiser', icon: BatteryCharging },
+      {
+        name: 'Stromanschluss beantragen',
+        href: 'https://grid.ecp.epilot.io/',
+        external: true,
+        icon: Zap,
+      },
     ],
   },
   {
-    name: 'Wärme',
+    name: 'Erdgas',
     href: '#',
     subItems: [
-      { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
-      { name: 'Wärmepumpe', href: '/warmepumpe', icon: Heater },
-      { name: 'Fernwärme', href: '/fernwarme', icon: Factory },
+      {
+        name: 'Erdgasanschluss beantragen',
+        href: 'https://grid.ecp.epilot.io/',
+        external: true,
+        icon: Flame,
+      },
     ],
   },
   {
-    name: 'E-Mobilität',
+    name: 'Wasser',
     href: '#',
     subItems: [
-      { name: 'Ladestrom', href: '/ladestrom', icon: BatteryCharging },
-      { name: 'Wallbox', href: '/wallbox', icon: PlugZap },
+      { name: 'Wasserhausanschluss beantragen', href: '/netz/wasser/anschluss', icon: Droplet },
     ],
   },
   {
-    name: 'Solar',
+    name: 'Fernwärme',
     href: '#',
     subItems: [
-      { name: 'Photovoltaik', href: '/photovoltaik', icon: Sun },
-      { name: 'Balkonkraftwerke', href: '/balkonkraftwerke', icon: Zap },
+      { name: 'Verfügbarkeitscheck', href: '/netz/fernwarme/check', icon: ThermometerSun },
     ],
   },
-  { name: 'Service', href: '/service' },
+  { name: 'Service', href: '#' },
+  { name: 'Für Installateure', href: 'https://installateur.ecp.epilot.io/', external: true },
 ];
 
-export const Navbar = () => {
+export function NetzNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [selectedSegment, setSelectedSegment] = useState<'vertrieb' | 'netz'>('vertrieb');
+  const [selectedSegment, setSelectedSegment] = useState<'tarif' | 'netz'>('netz');
 
   // Track which dropdown is open on desktop (for hover/click)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,7 +100,6 @@ export const Navbar = () => {
 
   const baseLinkClass =
     'text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors flex items-center gap-2 cursor-pointer';
-  const standardLinkClass = `${baseLinkClass} hover:bg-[#deff03] hover:text-black`;
   const netzLinkClass = `${baseLinkClass} hover:bg-[#63BEF8] hover:text-black`;
 
   return (
@@ -128,37 +124,35 @@ export const Navbar = () => {
           <div className="bg-gray-50 border-b border-gray-100 h-12">
             <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <a href="/" className="flex items-center w-28">
+                <a href="/netz" className="flex items-center w-28">
                   <Logo
                     withStripe={true}
                     stripeColor={selectedSegment === 'netz' ? 'blue' : 'yellow'}
                   />
                 </a>
 
-                {/* Segmented Control - Vertrieb & Netz */}
+                {/* Segmented Control - Tarif & Netz */}
                 <div className="hidden xl:flex items-center gap-0">
-                  <button
-                    className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
-                      selectedSegment === 'vertrieb'
-                        ? 'text-black'
-                        : 'text-gray-700 hover:text-black'
+                  <Link
+                    to="/"
+                    className={`group relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                      selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
-                    onClick={() => setSelectedSegment('vertrieb')}
+                    onClick={() => setSelectedSegment('tarif')}
                   >
                     {/* Yellow accent bar - animates from bottom to top */}
                     <div
                       className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#deff03] transition-all duration-300 origin-bottom ${
-                        selectedSegment === 'vertrieb'
+                        selectedSegment === 'tarif'
                           ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0'
+                          : 'scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
                       }`}
                     />
                     <FileText className="w-4 h-4 relative z-10" />
-                    <span className="relative z-10">Vertrieb</span>
-                  </button>
-                  <Link
-                    to="/netz"
-                    className={`group relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    <span className="relative z-10">Tarif</span>
+                  </Link>
+                  <button
+                    className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
                       selectedSegment === 'netz' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
                     onClick={() => setSelectedSegment('netz')}
@@ -168,21 +162,19 @@ export const Navbar = () => {
                       className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#63BEF8] transition-all duration-300 origin-bottom ${
                         selectedSegment === 'netz'
                           ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
+                          : 'scale-y-0 opacity-0'
                       }`}
                     />
                     <Zap className="w-4 h-4 relative z-10" />
                     <span className="relative z-10">Netz</span>
-                  </Link>
+                  </button>
                 </div>
               </div>
 
               {/* Über uns - Right aligned */}
               <div className="hidden xl:block">
                 <a
-                  href="https://www.epilot.cloud/en/company/about"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   className="text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors hover:text-black"
                 >
                   Über uns
@@ -196,12 +188,12 @@ export const Navbar = () => {
             <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center">
               {/* Logo - appears here when scrolled */}
               <a
-                href="/"
+                href="/netz"
                 className={`flex items-center transition-all duration-300 ${
                   isScrolled ? 'w-28 opacity-100 mr-4' : 'w-0 opacity-0 overflow-hidden'
                 }`}
               >
-                <Logo withStripe={true} stripeColor="yellow" />
+                <Logo withStripe={true} stripeColor="blue" />
               </a>
 
               {/* Desktop Nav - shifts right when logo appears */}
@@ -210,25 +202,36 @@ export const Navbar = () => {
                   isScrolled ? '' : ''
                 }`}
               >
-                {NAV_ITEMS.map((item) => (
+                {NETZ_NAV_ITEMS.map((item) => (
                   <div
                     key={item.name}
                     className="relative"
                     onMouseEnter={() => item.subItems && handleMouseEnter(item.name)}
                     onMouseLeave={() => item.subItems && handleMouseLeave()}
                   >
-                    <a
-                      href={item.href}
-                      onClick={(e) => item.subItems && e.preventDefault()}
-                      className={`${standardLinkClass} ${activeDropdown === item.name ? 'bg-[#deff03] text-black' : ''}`}
-                    >
-                      {item.name}
-                      {item.subItems && (
-                        <ChevronDown
-                          className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`}
-                        />
-                      )}
-                    </a>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={netzLinkClass}
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={(e) => item.subItems && e.preventDefault()}
+                        className={`${netzLinkClass} ${activeDropdown === item.name ? 'bg-[#63BEF8] text-black' : ''}`}
+                      >
+                        {item.name}
+                        {item.subItems && (
+                          <ChevronDown
+                            className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`}
+                          />
+                        )}
+                      </a>
+                    )}
 
                     {/* Desktop Dropdown */}
                     {item.subItems && (
@@ -238,10 +241,24 @@ export const Navbar = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden py-2 z-[100]"
+                            className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden py-2 z-[100]"
                           >
                             {item.subItems.map((sub) => {
                               const IconComponent = sub.icon;
+                              if (sub.external) {
+                                return (
+                                  <a
+                                    key={sub.name}
+                                    href={sub.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                                  >
+                                    {IconComponent && <IconComponent className="w-4 h-4" />}
+                                    {sub.name}
+                                  </a>
+                                );
+                              }
                               return (
                                 <Link
                                   key={sub.name}
@@ -262,55 +279,16 @@ export const Navbar = () => {
               </div>
 
               <div className="hidden xl:flex items-center h-full gap-2 ml-auto">
-                {/* Kundenportal with dropdown */}
-                <div
-                  className="relative"
-                  onMouseEnter={() => handleMouseEnter('Kundenportal')}
-                  onMouseLeave={() => handleMouseLeave()}
+                {/* Netzkundenportal - direct link */}
+                <a
+                  href="https://grid.ecp.epilot.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={netzLinkClass}
                 >
-                  <a
-                    href="#"
-                    className={`${standardLinkClass} ${activeDropdown === 'Kundenportal' ? 'bg-[#deff03] text-black' : ''}`}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <User className="w-4 h-4" />
-                    <span>Kundenportal</span>
-                    <ChevronDown
-                      className={`w-3 h-3 transition-transform ${activeDropdown === 'Kundenportal' ? 'rotate-180' : ''}`}
-                    />
-                  </a>
-
-                  {/* Kundenportal Dropdown */}
-                  <AnimatePresence>
-                    {activeDropdown === 'Kundenportal' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden py-2 z-[100]"
-                      >
-                        <a
-                          href="https://sales-kundenportal.ecp.epilot.io/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
-                        >
-                          <UserCircle className="w-4 h-4" />
-                          Privatkunde
-                        </a>
-                        <a
-                          href="https://b2b-demoportal.ecp.epilot.io/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
-                        >
-                          <Building2 className="w-4 h-4" />
-                          Geschäftskunde
-                        </a>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                  <User className="w-4 h-4" />
+                  <span>Netzkundenportal</span>
+                </a>
               </div>
 
               {/* Mobile Toggle */}
@@ -333,29 +311,27 @@ export const Navbar = () => {
                 className="xl:hidden border-t border-gray-100 bg-white overflow-hidden shadow-lg max-h-[85vh] overflow-y-auto"
               >
                 <div className="flex flex-col py-2">
-                  {NAV_ITEMS.map((item) => (
+                  {NETZ_NAV_ITEMS.map((item) => (
                     <div
                       key={item.name}
                       className="group relative border-b border-gray-50 last:border-0"
                     >
-                      {/* Hover Bar - Neon Yellow */}
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#deff03] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                      {/* Hover Bar - Blue */}
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#63BEF8] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
                       <div
                         className="flex items-center justify-between px-6 py-4 cursor-pointer"
-                        onClick={() =>
-                          item.subItems ? toggleMobileSubmenu(item.name) : setIsOpen(false)
-                        }
+                        onClick={() => {
+                          if (item.external) {
+                            window.open(item.href, '_blank');
+                          } else if (item.subItems) {
+                            toggleMobileSubmenu(item.name);
+                          } else {
+                            setIsOpen(false);
+                          }
+                        }}
                       >
-                        <a
-                          href={item.href}
-                          className="text-lg font-medium text-gray-900"
-                          onClick={(e) => {
-                            if (item.subItems) e.preventDefault();
-                          }}
-                        >
-                          {item.name}
-                        </a>
+                        <span className="text-lg font-medium text-gray-900">{item.name}</span>
                         {item.subItems && (
                           <ChevronDown
                             className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === item.name ? 'rotate-180' : ''}`}
@@ -376,6 +352,21 @@ export const Navbar = () => {
                               <div className="flex flex-col py-2">
                                 {item.subItems.map((sub) => {
                                   const IconComponent = sub.icon;
+                                  if (sub.external) {
+                                    return (
+                                      <a
+                                        key={sub.name}
+                                        href={sub.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 px-8 py-3 text-gray-600 text-base border-b border-gray-100 last:border-0 hover:bg-gray-100"
+                                        onClick={() => setIsOpen(false)}
+                                      >
+                                        {IconComponent && <IconComponent className="w-4 h-4" />}
+                                        {sub.name}
+                                      </a>
+                                    );
+                                  }
                                   return (
                                     <Link
                                       key={sub.name}
@@ -403,4 +394,4 @@ export const Navbar = () => {
       </nav>
     </>
   );
-};
+}

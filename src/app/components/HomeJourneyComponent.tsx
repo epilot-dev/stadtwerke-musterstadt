@@ -15,7 +15,6 @@ const JourneyWebComponent = ({ journeyId }: JourneyWebComponentProps) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data && typeof event.data === 'object') {
-        // if (event.data.type === 'EPILOT/JOURNEY_LOADED' && journeyRef?.current) {
         if (event.data.type === 'EPILOT/USER_EVENT/PAGE_VIEW' && journeyRef?.current && !isLoaded) {
           setIsLoaded(true);
         }

@@ -1,5 +1,4 @@
 import svgPaths from './svg-76k4j86d97';
-import React from 'react';
 
 export default function Union() {
   return (

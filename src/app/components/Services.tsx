@@ -1,5 +1,5 @@
-import React from 'react';
-import { Zap, Flame, ThermometerSun, Factory, PlugZap, Sun, ArrowRight } from 'lucide-react';
+import { Zap, ThermometerSun, Factory, PlugZap, Sun, MessageCircle } from 'lucide-react';
+import { ProductCard } from '@/app/components/ProductCard';
 
 const services = [
   {
@@ -7,7 +7,7 @@ const services = [
     description: 'Heizen Sie effizient und umweltfreundlich mit modernster Wärmepumpentechnik.',
     icon: ThermometerSun,
     color: 'bg-[#deff03]',
-    href: '#',
+    href: '/warmepumpe',
     image: '/warmepump.png',
     imageSize: 'w-[280px] h-[280px] -mr-24 -mt-24',
   },
@@ -17,7 +17,7 @@ const services = [
     icon: Factory,
     color: 'bg-red-100',
     iconColor: 'text-red-600',
-    href: '#',
+    href: '/fernwarme',
     image: '/fernwarme.png',
   },
   {
@@ -27,7 +27,7 @@ const services = [
     icon: PlugZap,
     color: 'bg-green-100',
     iconColor: 'text-green-600',
-    href: '#',
+    href: '/wallbox',
     image: '/wallbox.png',
     imageSize: 'w-80 h-80 -mr-20 -mt-28',
   },
@@ -37,7 +37,7 @@ const services = [
     icon: Sun,
     color: 'bg-orange-100',
     iconColor: 'text-orange-600',
-    href: '#',
+    href: '/photovoltaik',
     image: '/photovoltaik.png',
     imageSize: 'w-[280px] h-[280px] -mr-24 -mt-24',
   },
@@ -47,7 +47,7 @@ const services = [
     icon: Zap,
     color: 'bg-yellow-100',
     iconColor: 'text-yellow-600',
-    href: '#',
+    href: '/balkonkraftwerke',
     image: '/balkon.png',
     imageSize: 'w-[280px] h-[280px] -mr-24 -mt-[88px]',
   },
@@ -69,63 +69,37 @@ export function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
-            const Icon = service.icon as React.ElementType;
-            return (
-              <a
-                key={index}
-                href={service.href}
-                className="group relative flex flex-col p-8 bg-gray-50 rounded-3xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
-              >
-                {service.image ? (
-                  <div
-                    className={`absolute top-0 right-0 ${service.imageSize || 'w-80 h-80 -mr-28 -mt-28'} transition-all duration-500 group-hover:scale-105 z-0 pointer-events-none opacity-60 group-hover:opacity-100`}
-                  >
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-contain object-center"
-                      loading="lazy"
-                      decoding="async"
-                      width="280"
-                      height="280"
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className={`absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -mr-8 -mt-8 transition-transform group-hover:scale-110 ${service.color}`}
-                  />
-                )}
-
-                <div className="relative z-10 mb-6">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-[#222222] transition-colors duration-300 group-hover:bg-[#deff03]">
-                    <Icon className="w-7 h-7" />
-                  </div>
-                </div>
-
-                <h3 className="relative z-10 text-2xl font-bold text-[#222222] mb-3">
-                  {service.title}
-                </h3>
-
-                <p className="relative z-10 text-gray-600 mb-6 flex-grow">{service.description}</p>
-
-                <div className="relative z-10 flex items-center font-bold text-[#222222] group-hover:text-black transition-colors">
-                  Mehr erfahren{' '}
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </a>
-            );
-          })}
+          {services.map((service, index) => (
+            <ProductCard
+              key={index}
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+              href={service.href}
+              cta="Mehr erfahren"
+              variant="tarif"
+              image={service.image}
+              imageSize={service.imageSize}
+            />
+          ))}
 
           {/* Call to Action Card */}
-          <div className="flex flex-col justify-center p-8 bg-[#222222] rounded-3xl text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#deff03] rounded-full blur-[80px] opacity-10 translate-x-1/2 -translate-y-1/2" />
+          <div className="flex flex-col justify-between p-8 pb-8 bg-gradient-to-br from-[#222222] via-[#222222] to-[#2a3310] rounded-3xl text-white relative overflow-hidden">
+            {/* Neon green glow from bottom right */}
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#deff03] rounded-full blur-[120px] opacity-20 translate-x-1/3 translate-y-1/3" />
 
-            <h3 className="text-2xl font-bold mb-4 relative z-10">Sie haben Fragen?</h3>
-            <p className="text-gray-300 mb-8 relative z-10">
-              Unser Kundenservice ist für Sie da. Persönlich, telefonisch oder online.
-            </p>
-            <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold hover:bg-[#deff03] transition-colors relative z-10 cursor-pointer">
+            <div>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-white/10 mb-6 relative z-10">
+                <MessageCircle className="w-7 h-7" />
+              </div>
+
+              <h3 className="text-2xl font-bold mb-4 relative z-10">Sie haben Fragen?</h3>
+              <p className="text-gray-300 mb-8 relative z-10">
+                Unser Kundenservice ist für Sie da. Persönlich, telefonisch oder online.
+              </p>
+            </div>
+
+            <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold transition-all duration-300 relative z-10 cursor-pointer hover:bg-[#deff03] hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]">
               Kontakt aufnehmen
             </button>
           </div>

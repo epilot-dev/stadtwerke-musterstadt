@@ -1,5 +1,4 @@
 import svgPaths from './svg-gx1gh4ostq';
-import React from 'react';
 
 function WaterEc() {
   return (

@@ -1,5 +1,4 @@
 import svgPaths from './svg-jumb5zsoz2';
-import React from 'react';
 
 export default function Logo() {
   return (

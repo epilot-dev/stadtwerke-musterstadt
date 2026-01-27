@@ -78,7 +78,7 @@ export function PasskeyGate({ children }: PasskeyGateProps) {
         >
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <Logo variant="dark" className="w-48" />
+            <Logo variant="dark" className="w-40" withStripe={true} stripeColor="yellow" />
           </div>
 
           {/* Lock icon */}
