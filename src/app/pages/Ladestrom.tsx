@@ -1,5 +1,6 @@
 import { JourneyPage } from '@/app/components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Ladestrom() {
-  return <JourneyPage title="Ladestrom" journeyId="ad09ec60-f6a9-11f0-a0ca-4bf89ca038a5" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.ladestrom} />;
 }

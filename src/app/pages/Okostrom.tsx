@@ -1,5 +1,6 @@
 import { JourneyPage } from '@/app/components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Okostrom() {
-  return <JourneyPage title="Ökostrom" journeyId="acdd3710-f6a9-11f0-8690-bd699bceb8fd" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.okostrom} />;
 }

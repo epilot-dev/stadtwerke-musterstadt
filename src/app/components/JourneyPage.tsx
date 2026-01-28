@@ -4,23 +4,23 @@ import JourneyWebComponent from './JourneyComponent';
 import { cn } from './ui/utils';
 
 interface JourneyPageProps {
-  title: string;
   journeyId?: string;
   mode?: 'inline' | 'full-screen';
 }
 
-export function JourneyPage({ title, journeyId, mode }: JourneyPageProps) {
+export function JourneyPage({ journeyId, mode }: JourneyPageProps) {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-[#deff03] selection:text-black flex flex-col">
+    <div className="min-h-screen font-sans text-gray-900 selection:bg-[#deff03] selection:text-black flex flex-col">
       <Navbar />
-      <main className={cn('flex flex-col items-center justify-center', !journeyId && 'h-[700px]')}>
-        <div className="mt-12 mb-4">
-          <h1 className="text-5xl font-bold text-gray-900">{title}</h1>
-        </div>
-
+      <main
+        className={cn(
+          'flex flex-col items-center justify-center bg-[#fcfdf3]',
+          !journeyId && 'h-[700px]'
+        )}
+      >
         {journeyId ? (
-          <div className="w-full max-w-7xl bg-white rounded-3xl  mx-auto my-16">
-            <JourneyWebComponent journeyId={journeyId} mode={mode} />
+          <div className="w-full max-w-7xl rounded-3xl  mx-auto my-12">
+            <JourneyWebComponent journeyId={journeyId} mode={mode} isPage />
           </div>
         ) : (
           <div className="text-center">

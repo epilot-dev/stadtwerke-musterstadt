@@ -1,5 +1,6 @@
 import { JourneyPage } from '@/app/components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Warmestrom() {
-  return <JourneyPage title="Wärmestrom" journeyId="ad3b3590-f6a9-11f0-a09d-79c81896a66f" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.warmestrom} />;
 }

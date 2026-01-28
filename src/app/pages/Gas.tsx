@@ -1,5 +1,6 @@
 import { JourneyPage } from '@/app/components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Gas() {
-  return <JourneyPage title="Gas" journeyId="ac69b4c0-f6a9-11f0-bdea-71e0dd732fd3" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.gas} />;
 }

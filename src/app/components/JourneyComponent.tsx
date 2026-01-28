@@ -9,12 +9,14 @@ type JourneyWebComponentProps = {
   journeyId: string;
   mode?: 'inline' | 'full-screen';
   className?: string;
+  isPage?: boolean;
 };
 
 const JourneyWebComponent = ({
   journeyId,
   mode = 'inline',
   className,
+  isPage,
 }: JourneyWebComponentProps) => {
   const journeyRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -38,7 +40,7 @@ const JourneyWebComponent = ({
   return (
     <div className={cn(styles.container, className)}>
       {/* Skeleton loading state */}
-      <JourneySkeleton isLoaded={isLoaded} />
+      <JourneySkeleton isLoaded={isLoaded} isPage={isPage} />
 
       {/* Actual journey component */}
       <div className={`${styles.journeyWrapper} ${isLoaded ? styles.visible : ''}`}>

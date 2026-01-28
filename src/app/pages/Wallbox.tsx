@@ -1,5 +1,6 @@
 import { JourneyPage } from '@/app/components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Wallbox() {
-  return <JourneyPage title="Wallbox" journeyId="af941b10-f6e8-11f0-b5b3-751931812c7e" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.wallbox} />;
 }

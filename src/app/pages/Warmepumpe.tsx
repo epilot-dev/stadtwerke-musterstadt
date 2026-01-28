@@ -1,5 +1,6 @@
 import { JourneyPage } from '../components/JourneyPage';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function Warmepumpe() {
-  return <JourneyPage title="Wärmepumpe" journeyId="37881250-f6ea-11f0-a7a0-e7cdfacb21dc" />;
+  return <JourneyPage journeyId={JOURNEY_IDS.warmepumpe} />;
 }

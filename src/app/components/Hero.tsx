@@ -1,6 +1,7 @@
 import { Button } from './ui/button';
 import { motion, useScroll, useTransform } from 'motion/react';
 import JourneyComponent from './JourneyComponent';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -55,10 +56,12 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="w-full max-w-md bg-white rounded-3xl shadow-2xl"
         >
-          <JourneyComponent
-            journeyId="ae206570-f6a9-11f0-a0ca-4bf89ca038a5"
-            className="rounded-3xl"
-          />
+          <div className="px-8 py-6">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Tarif berechnen</h3>
+            <p className="text-gray-500">Finden Sie den passenden Tarif für Ihr Zuhause.</p>
+          </div>
+
+          <JourneyComponent journeyId={JOURNEY_IDS.homepage} className="rounded-3xl" />
         </motion.div>
       </div>
 

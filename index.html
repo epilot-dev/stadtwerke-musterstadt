@@ -14,6 +14,32 @@
     <link rel="icon" href="/icon.png" />
     <link rel="apple-touch-icon" href="/icon.png" />
 
+    <!-- Preconnect to journey API for faster loading -->
+    <link rel="preconnect" href="https://journey-config.sls.epilot.io" crossorigin />
+    <link rel="dns-prefetch" href="https://journey-config.sls.epilot.io" />
+    <link rel="preconnect" href="https://journey.epilot.io" crossorigin />
+    <link rel="dns-prefetch" href="https://journey.epilot.io" />
+
+    <!-- Preload homepage journey configs (above the fold) -->
+    <link
+      rel="preload"
+      href="https://journey-config.sls.epilot.io/v1/journey/configuration/ae206570-f6a9-11f0-a0ca-4bf89ca038a5"
+      as="fetch"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://journey-config.sls.epilot.io/v1/journey/configuration/acdd3710-f6a9-11f0-8690-bd699bceb8fd"
+      as="fetch"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://journey-config.sls.epilot.io/v1/journey/configuration/ac69b4c0-f6a9-11f0-bdea-71e0dd732fd3"
+      as="fetch"
+      crossorigin
+    />
+
     <!-- Load the epilot journey embed script -->
     <script src="https://journey.epilot.io/canary/assets/embed.js" type="module" async></script>
     <script src="https://t.contentsquare.net/uxa/0cdeaa347c1a9.js"></script>
