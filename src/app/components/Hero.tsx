@@ -2,33 +2,139 @@ import { Button } from './ui/button';
 import { motion, useScroll, useTransform } from 'motion/react';
 import JourneyComponent from './JourneyComponent';
 import { JOURNEY_IDS } from '@/lib/journeyPreloader';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { cn } from './ui/utils';
+
+// Type for journey page view event
+interface JourneyPageViewEvent {
+  type: 'EPILOT/USER_EVENT/PAGE_VIEW';
+  journeyId: string;
+  payload: {
+    path: string;
+    journeyName: string;
+  };
+}
 
 export function Hero() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
-  return (
-    <section className="relative w-full min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gray-900 overflow-hidden">
-      {/* Background Image with Parallax */}
-      <motion.div className="absolute inset-0 z-0" style={{ y }}>
-        <motion.img
-          src="/hero.png"
-          alt="Modern sustainable city"
-          className="w-full h-full object-cover"
-          style={{ opacity }}
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
-      </motion.div>
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  // Track the first step for each sub-journey: Map<journeyId, { isLoaded: boolean, path: string }>
+  const firstStepsRef = useRef<
+    Map<
+      string,
+      {
+        isLoaded: boolean;
+        path: string;
+      }
+    >
+  >(new Map());
 
-      <div className="container mx-auto max-w-screen-xl px-4 md:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
-        {/* Text Content */}
-        <div className="flex-1 text-white max-w-2xl">
+  // Handle journey navigation events
+  const handleJourneyMessage = useCallback((event: MessageEvent) => {
+    if (
+      !event?.data ||
+      typeof event.data !== 'object' ||
+      event.data.type !== 'EPILOT/USER_EVENT/PAGE_VIEW'
+    ) {
+      return;
+    }
+
+    const { payload, journeyId } = event.data as JourneyPageViewEvent;
+    const { path } = payload;
+
+    // Get the current first step for this journey (if exists)
+    const firstStepData = firstStepsRef.current.get(journeyId);
+    const firstStepPath = firstStepData?.path;
+    const firstStepLoaded = firstStepData?.isLoaded;
+
+    // If the first step is not loaded, set it to loaded and return
+    if (!firstStepLoaded) {
+      firstStepsRef.current.set(journeyId, { isLoaded: true, path });
+      console.log('[Hero] Registered first step for journey', { journeyId, path });
+      return;
+    }
+
+    if (firstStepPath === path) {
+      // Navigated back to the first step - exit fullscreen
+      setIsFullscreen(false);
+    } else {
+      // Navigated away from the first step - enter fullscreen
+      setIsFullscreen(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('message', handleJourneyMessage);
+    return () => {
+      window.removeEventListener('message', handleJourneyMessage);
+    };
+  }, [handleJourneyMessage]);
+
+  // Scroll to top when entering fullscreen
+  useEffect(() => {
+    if (isFullscreen) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isFullscreen]);
+
+  return (
+    <section
+      className={cn(
+        'relative w-full',
+        isFullscreen
+          ? 'min-h-screen bg-white'
+          : 'min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gray-900 overflow-hidden'
+      )}
+    >
+      {/* Background Image with Parallax */}
+      {!isFullscreen && (
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{ y }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <motion.img
+            src="/hero.png"
+            alt="Modern sustainable city"
+            className="w-full h-full object-cover"
+            style={{ opacity }}
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+        </motion.div>
+      )}
+
+      {isFullscreen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm"
+        >
+          <div className="container mx-auto max-w-screen-xl px-4 md:px-6 py-4 flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-gray-900">Tarif berechnen</h2>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Main Content Container */}
+      <div
+        className={cn(
+          'relative z-10',
+          isFullscreen
+            ? 'w-full'
+            : 'container mx-auto max-w-screen-xl px-4 md:px-6 flex flex-col lg:flex-row items-center gap-12'
+        )}
+      >
+        {!isFullscreen && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="flex-1 text-white max-w-2xl"
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
               Energie für <span className="text-[#deff03]">Morgen</span>.
@@ -47,26 +153,32 @@ export function Hero() {
               </Button>
             </div>
           </motion.div>
-        </div>
+        )}
 
-        {/* Calculator Card */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full max-w-md bg-white rounded-3xl shadow-2xl"
+          className={cn(
+            isFullscreen
+              ? 'w-full max-w-screen-lg mx-auto px-0 md:px-6 md:py-12'
+              : 'w-full max-w-md rounded-3xl shadow-2xl bg-[#f9fafb] pb-6'
+          )}
         >
-          <div className="px-8 py-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Tarif berechnen</h3>
-            <p className="text-gray-500">Finden Sie den passenden Tarif für Ihr Zuhause.</p>
-          </div>
+          {!isFullscreen && (
+            <motion.div
+              initial={{ opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.3 }}
+              className="px-8 py-6 overflow-hidden"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Tarif berechnen</h3>
+              <p className="text-gray-500">Finden Sie den passenden Tarif für Ihr Zuhause.</p>
+            </motion.div>
+          )}
 
-          <JourneyComponent journeyId={JOURNEY_IDS.homepage} className="rounded-3xl" />
+          <JourneyComponent
+            journeyId={JOURNEY_IDS.homepage}
+            className={cn(isFullscreen ? 'rounded-2xl' : 'rounded-3xl')}
+          />
         </motion.div>
       </div>
-
-      {/* Decorative Brand Element */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#deff03]" />
     </section>
   );
 }

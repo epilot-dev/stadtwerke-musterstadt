@@ -12,6 +12,11 @@ type JourneyWebComponentProps = {
   isPage?: boolean;
 };
 
+const journeyEvents = {
+  inline: 'EPILOT/USER_EVENT/PAGE_VIEW',
+  'full-screen': 'EPILOT/JOURNEY_LOADED',
+};
+
 const JourneyWebComponent = ({
   journeyId,
   mode = 'inline',
@@ -24,7 +29,8 @@ const JourneyWebComponent = ({
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data && typeof event.data === 'object') {
-        if (event.data.type === 'EPILOT/USER_EVENT/PAGE_VIEW' && journeyRef?.current && !isLoaded) {
+        // Only works for inline journeys. If not inline, use
+        if (event.data.type === journeyEvents[mode] && journeyRef?.current && !isLoaded) {
           setTimeout(() => setIsLoaded(true), 500);
         }
       }
@@ -35,7 +41,7 @@ const JourneyWebComponent = ({
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [isLoaded]);
+  }, [isLoaded, mode]);
 
   return (
     <div className={cn(styles.container, className)}>
