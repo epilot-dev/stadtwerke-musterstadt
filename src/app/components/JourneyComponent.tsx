@@ -23,7 +23,7 @@ const JourneyWebComponent = ({
     const handleMessage = (event: MessageEvent) => {
       if (event.data && typeof event.data === 'object') {
         if (event.data.type === 'EPILOT/USER_EVENT/PAGE_VIEW' && journeyRef?.current && !isLoaded) {
-          setIsLoaded(true);
+          setTimeout(() => setIsLoaded(true), 500);
         }
       }
     };
