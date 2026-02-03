@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProductCard } from '@/app/components/ProductCard';
 import { Zap, Droplet, ThermometerSun, Flame } from 'lucide-react';
 

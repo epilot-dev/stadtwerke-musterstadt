@@ -1,6 +1,5 @@
 import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
-import { HeroSection } from '@/app/components/HeroSection';
 import { ProductCard } from '@/app/components/ProductCard';
 import { BatteryCharging, LineChart } from 'lucide-react';
 
@@ -10,17 +9,41 @@ export default function StromEinspeiser() {
       <NetzNavbar />
 
       <main>
-        <HeroSection
-          title="Einspeiser und Verbraucher"
-          description="Ob Sie Strom ins Netz einspeisen oder beziehen möchten – wir begleiten Sie durch den gesamten Prozess. Melden Sie Ihre Anlage an oder teilen Sie uns Ihren Zählerstand mit."
-          imageSrc="https://images.unsplash.com/photo-1662023027736-0cab9f911b2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3dlciUyMGdyaWQlMjBlbGVjdHJpY2l0eXxlbnwxfHx8fDE3Njk0MTc5Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          imageAlt="Power grid infrastructure"
-          variant="netz"
-        />
+        {/* Full-width Hero Section */}
+        <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-white flex justify-center">
+          {/* Background Image - constrained to 1920px */}
+          <div className="absolute inset-0 flex justify-center bg-white">
+            <div className="w-full max-w-[1920px] h-full relative">
+              <img
+                src="/strom-grid.png"
+                alt="Renewable Energy Infrastructure - Solar Panels and Wind Turbines"
+                className="w-full h-full object-cover"
+              />
+              {/* Blue Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent"></div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="relative h-full w-full max-w-[1920px] mx-auto">
+            <div className="container mx-auto max-w-screen-xl px-4 md:px-6 flex items-center h-full">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                  Einspeiser und Verbraucher
+                </h1>
+                <p className="text-lg md:text-xl text-white/95 leading-relaxed">
+                  Ob Sie Strom ins Netz einspeisen oder beziehen möchten – wir begleiten Sie durch
+                  den gesamten Prozess. Melden Sie Ihre Anlage an oder teilen Sie uns Ihren
+                  Zählerstand mit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Info Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
+        <section className="py-12 md:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Ihre Möglichkeiten

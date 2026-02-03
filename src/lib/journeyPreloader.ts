@@ -11,6 +11,7 @@ export const JOURNEY_IDS = {
   wallbox: 'af941b10-f6e8-11f0-b5b3-751931812c7e',
   photovoltaik: '4fa8b7d0-f6eb-11f0-999c-9303fbefac6f',
   balkonkraftwerke: '8d321a90-fdbe-11f0-a4a6-6f54fcf2a600',
+  fernwarme: '67cd2783-c5a6-4a61-b3c9-e4076eb723b3',
 } as const;
 
 export type JourneyKey = keyof typeof JOURNEY_IDS;

@@ -6,20 +6,25 @@ import {
   User,
   ChevronDown,
   Zap,
+  FileText,
   UserCircle,
   Building2,
-  Leaf,
   Flame,
-  ThermometerSun,
   BatteryCharging,
+  Sun,
+  ThermometerSun,
   Factory,
   PlugZap,
-  Sun,
   Heater,
-  FileText,
+  Leaf,
+  Home,
+  CreditCard,
+  TrendingUp,
+  XCircle,
+  ClipboardList,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Define the navigation structure
 const NAV_ITEMS = [
@@ -58,20 +63,43 @@ const NAV_ITEMS = [
       { name: 'Balkonkraftwerke', href: '/balkonkraftwerke', icon: Zap },
     ],
   },
-  { name: 'Service', href: '/service' },
+  {
+    name: 'Service',
+    href: '/service',
+    subItems: [
+      { name: 'Übersicht', href: '/service', icon: ClipboardList },
+      { name: 'Umzug melden', href: '/service#umzug', icon: Home },
+      { name: 'SEPA-Mandat einrichten', href: '/service#sepa', icon: CreditCard },
+      { name: 'Abschlag anpassen', href: '/service#abschlag', icon: TrendingUp },
+      { name: 'Vertrag kündigen', href: '/service#kuendigung', icon: XCircle },
+    ],
+  },
 ];
 
-export const Navbar = () => {
+// Define primary parent for each route to avoid multiple highlights
+const ROUTE_PRIMARY_PARENT: Record<string, string> = {
+  '/okostrom': 'Strom & Gas',
+  '/gas': 'Strom & Gas',
+  '/warmestrom': 'Wärme', // Primary parent is "Wärme" (also appears in "Strom & Gas")
+  '/ladestrom': 'E-Mobilität', // Primary parent is "E-Mobilität" (also appears in "Strom & Gas")
+  '/warmepumpe': 'Wärme',
+  '/fernwarme': 'Wärme',
+  '/wallbox': 'E-Mobilität',
+  '/photovoltaik': 'Solar',
+  '/balkonkraftwerke': 'Solar',
+  '/service': 'Service',
+};
+
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [selectedSegment, setSelectedSegment] = useState<'vertrieb' | 'netz'>('vertrieb');
+  const [selectedSegment, setSelectedSegment] = useState<'tarif' | 'netz'>('tarif');
+  const location = useLocation();
 
   // Track which dropdown is open on desktop (for hover/click)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,29 +132,48 @@ export const Navbar = () => {
   const baseLinkClass =
     'text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors flex items-center gap-2 cursor-pointer';
   const standardLinkClass = `${baseLinkClass} hover:bg-[#deff03] hover:text-black`;
-  const netzLinkClass = `${baseLinkClass} hover:bg-[#63BEF8] hover:text-black`;
+
+  // Helper function to check if a nav item is active
+  const isNavItemActive = (item: (typeof NAV_ITEMS)[0]) => {
+    // Check if the main item href matches (for items like Service that have both href and subItems)
+    if (item.href === location.pathname) {
+      return true;
+    }
+
+    // For items with sub-items, check if this is the PRIMARY parent for the current route
+    if (item.subItems) {
+      // Check if any sub-item path matches
+      const hasMatchingSubItem = item.subItems.some((sub) => {
+        const subPath = sub.href.split('#')[0]; // Remove hash for comparison
+        return subPath === location.pathname;
+      });
+
+      // Only highlight if this item is the primary parent for the current route
+      if (hasMatchingSubItem) {
+        const primaryParent = ROUTE_PRIMARY_PARENT[location.pathname];
+        return primaryParent === item.name;
+      }
+    }
+
+    return false;
+  };
 
   return (
     <>
       {/* Spacer to prevent content jump since Navbar is fixed */}
-      <div
-        className={`w-full transition-all duration-300 ${isScrolled ? 'h-16' : 'h-28'}`}
-        aria-hidden="true"
-      />
+      <div className={`w-full h-16 ${isScrolled ? 'xl:h-16' : 'xl:h-28'}`} aria-hidden="true" />
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-gray-100 shadow-sm bg-white`}
-        style={{
-          height: isScrolled ? '64px' : '112px',
-          transition: 'height 300ms',
-        }}
+        className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-gray-100 shadow-sm bg-white h-16 xl:transition-all xl:duration-300 ${
+          isScrolled ? 'xl:h-16' : 'xl:h-28'
+        }`}
       >
         <div
-          className={`transition-transform duration-300 ${isScrolled ? '-translate-y-12' : 'translate-y-0'}`}
+          className={`xl:transition-transform xl:duration-300 ${isScrolled ? 'xl:-translate-y-12' : 'xl:translate-y-0'}`}
         >
-          {/* First Line - Logo and Segmented Control */}
-          <div className="bg-gray-50 border-b border-gray-100 h-12">
-            <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center justify-between">
+          {/* First Line - Logo and Segmented Control (Desktop Only) */}
+          <div className="bg-gray-50 border-b border-gray-100 h-12 hidden xl:block">
+            <div className="container mx-auto max-w-[1440px] px-4 md:px-6 h-full flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <a href="/" className="flex items-center w-28">
                   <Logo
@@ -135,40 +182,39 @@ export const Navbar = () => {
                   />
                 </a>
 
-                {/* Segmented Control - Vertrieb & Netz */}
+                {/* Segmented Control - Tarif & Netz */}
                 <div className="flex items-center gap-0">
-                  <button
-                    className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
-                      selectedSegment === 'vertrieb'
-                        ? 'text-black'
-                        : 'text-gray-700 hover:text-black'
+                  <Link
+                    to="/"
+                    className={`relative flex items-center gap-1 px-3 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                      selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
-                    onClick={() => setSelectedSegment('vertrieb')}
+                    onClick={() => setSelectedSegment('tarif')}
                   >
                     {/* Yellow accent bar - animates from bottom to top */}
                     <div
-                      className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#deff03] transition-all duration-300 origin-bottom ${
-                        selectedSegment === 'vertrieb'
-                          ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0'
+                      className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                        selectedSegment === 'tarif'
+                          ? 'bg-[#deff03] scale-y-100 opacity-100'
+                          : 'bg-[#deff03] scale-y-0 opacity-0'
                       }`}
                     />
                     <FileText className="w-4 h-4 relative z-10" />
                     <span className="relative z-10">Vertrieb</span>
-                  </button>
+                  </Link>
                   <Link
                     to="/netz"
-                    className={`group relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    className={`group relative flex items-center gap-1 px-3 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
                       selectedSegment === 'netz' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
                     onClick={() => setSelectedSegment('netz')}
                   >
                     {/* Blue accent bar - animates from bottom to top */}
                     <div
-                      className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#63BEF8] transition-all duration-300 origin-bottom ${
+                      className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
                         selectedSegment === 'netz'
-                          ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
+                          ? 'bg-[#63BEF8] scale-y-100 opacity-100'
+                          : 'bg-[#63BEF8] scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
                       }`}
                     />
                     <Zap className="w-4 h-4 relative z-10" />
@@ -178,11 +224,9 @@ export const Navbar = () => {
               </div>
 
               {/* Über uns - Right aligned */}
-              <div className="block">
+              <div>
                 <a
-                  href="https://www.epilot.cloud/en/company/about"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   className="text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors hover:text-black"
                 >
                   Über uns
@@ -193,11 +237,59 @@ export const Navbar = () => {
 
           {/* Second Line - Navigation Items */}
           <div className="bg-white h-16">
-            <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center">
-              {/* Logo - appears here when scrolled */}
+            <div className="container mx-auto max-w-[1440px] px-4 md:px-6 h-full flex items-center">
+              {/* Mobile: Logo + Vertrieb/Netz (always visible) */}
+              <a href="/" className="flex items-center w-28 xl:hidden mr-1">
+                <Logo
+                  withStripe={true}
+                  stripeColor={selectedSegment === 'netz' ? 'blue' : 'yellow'}
+                />
+              </a>
+
+              {/* Mobile Segment Buttons - Vertrieb & Netz */}
+              <div className="flex xl:hidden items-center gap-0 mr-auto">
+                <Link
+                  to="/"
+                  className={`relative flex items-center gap-1 px-2 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
+                  }`}
+                  onClick={() => setSelectedSegment('tarif')}
+                >
+                  {/* Yellow accent bar - animates from bottom to top */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                      selectedSegment === 'tarif'
+                        ? 'bg-[#deff03] scale-y-100 opacity-100'
+                        : 'bg-[#deff03] scale-y-0 opacity-0'
+                    }`}
+                  />
+                  <FileText className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Vertrieb</span>
+                </Link>
+                <Link
+                  to="/netz"
+                  className={`group relative flex items-center gap-1 px-2 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    selectedSegment === 'netz' ? 'text-black' : 'text-gray-700 hover:text-black'
+                  }`}
+                  onClick={() => setSelectedSegment('netz')}
+                >
+                  {/* Blue accent bar - animates from bottom to top */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                      selectedSegment === 'netz'
+                        ? 'bg-[#63BEF8] scale-y-100 opacity-100'
+                        : 'bg-[#63BEF8] scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
+                    }`}
+                  />
+                  <Zap className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Netz</span>
+                </Link>
+              </div>
+
+              {/* Desktop: Logo - appears here when scrolled */}
               <a
                 href="/"
-                className={`flex items-center transition-all duration-300 ${
+                className={`hidden xl:flex items-center transition-all duration-300 ${
                   isScrolled ? 'w-28 opacity-100 mr-4' : 'w-0 opacity-0 overflow-hidden'
                 }`}
               >
@@ -217,10 +309,15 @@ export const Navbar = () => {
                     onMouseEnter={() => item.subItems && handleMouseEnter(item.name)}
                     onMouseLeave={() => item.subItems && handleMouseLeave()}
                   >
-                    <a
-                      href={item.href}
-                      onClick={(e) => item.subItems && e.preventDefault()}
-                      className={`${standardLinkClass} ${activeDropdown === item.name ? 'bg-[#deff03] text-black' : ''}`}
+                    <Link
+                      to={item.href}
+                      onClick={(e) => {
+                        // Only prevent default for items with dropdowns that aren't "Service"
+                        if (item.subItems && item.name !== 'Service') {
+                          e.preventDefault();
+                        }
+                      }}
+                      className={`${standardLinkClass} ${isNavItemActive(item) ? 'bg-[rgba(222,255,3,0.5)] text-black' : ''}`}
                     >
                       {item.name}
                       {item.subItems && (
@@ -228,7 +325,7 @@ export const Navbar = () => {
                           className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`}
                         />
                       )}
-                    </a>
+                    </Link>
 
                     {/* Desktop Dropdown */}
                     {item.subItems && (
@@ -246,7 +343,7 @@ export const Navbar = () => {
                                 <Link
                                   key={sub.name}
                                   to={sub.href}
-                                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
                                 >
                                   {IconComponent && <IconComponent className="w-4 h-4" />}
                                   {sub.name}
@@ -293,7 +390,7 @@ export const Navbar = () => {
                           href="https://sales-kundenportal.ecp.epilot.io/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
                         >
                           <UserCircle className="w-4 h-4" />
                           Privatkunde
@@ -302,7 +399,7 @@ export const Navbar = () => {
                           href="https://b2b-demoportal.ecp.epilot.io/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
                         >
                           <Building2 className="w-4 h-4" />
                           Geschäftskunde
@@ -314,93 +411,141 @@ export const Navbar = () => {
               </div>
 
               {/* Mobile Toggle */}
-              <button
-                className="xl:hidden p-2 text-gray-700 ml-auto"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? <X /> : <Menu />}
+              <button className="xl:hidden p-2 text-gray-700" onClick={() => setIsOpen(!isOpen)}>
+                <motion.div
+                  initial={false}
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                  {isOpen ? <X /> : <Menu />}
+                </motion.div>
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Mobile Nav */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="xl:hidden border-t border-gray-100 bg-white overflow-hidden shadow-lg max-h-[85vh] overflow-y-auto"
-              >
-                <div className="flex flex-col py-2">
-                  {NAV_ITEMS.map((item) => (
+        {/* Mobile Nav */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="xl:hidden border-t border-gray-100 bg-white overflow-hidden shadow-lg max-h-[85vh] overflow-y-auto"
+            >
+              <div className="flex flex-col py-2">
+                {NAV_ITEMS.map((item) => (
+                  <div key={item.name} className="border-b border-gray-50 last:border-0">
                     <div
-                      key={item.name}
-                      className="group relative border-b border-gray-50 last:border-0"
+                      className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors"
+                      onClick={() =>
+                        item.subItems ? toggleMobileSubmenu(item.name) : setIsOpen(false)
+                      }
                     >
-                      {/* Hover Bar - Neon Yellow */}
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#deff03] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-
-                      <div
-                        className="flex items-center justify-between px-6 py-4 cursor-pointer"
-                        onClick={() =>
-                          item.subItems ? toggleMobileSubmenu(item.name) : setIsOpen(false)
-                        }
+                      <a
+                        href={item.href}
+                        className="text-lg font-medium text-gray-900"
+                        onClick={(e) => {
+                          if (item.subItems) e.preventDefault();
+                        }}
                       >
-                        <a
-                          href={item.href}
-                          className="text-lg font-medium text-gray-900"
-                          onClick={(e) => {
-                            if (item.subItems) e.preventDefault();
-                          }}
-                        >
-                          {item.name}
-                        </a>
-                        {item.subItems && (
-                          <ChevronDown
-                            className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === item.name ? 'rotate-180' : ''}`}
-                          />
-                        )}
-                      </div>
-
-                      {/* Mobile Submenu */}
+                        {item.name}
+                      </a>
                       {item.subItems && (
-                        <AnimatePresence>
-                          {mobileExpanded === item.name && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="bg-gray-50 overflow-hidden"
-                            >
-                              <div className="flex flex-col py-2">
-                                {item.subItems.map((sub) => {
-                                  const IconComponent = sub.icon;
-                                  return (
-                                    <Link
-                                      key={sub.name}
-                                      to={sub.href}
-                                      className="flex items-center gap-2 px-8 py-3 text-gray-600 text-base border-b border-gray-100 last:border-0 hover:bg-gray-100"
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      {IconComponent && <IconComponent className="w-4 h-4" />}
-                                      {sub.name}
-                                    </Link>
-                                  );
-                                })}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                        <ChevronDown
+                          className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === item.name ? 'rotate-180' : ''}`}
+                        />
                       )}
                     </div>
-                  ))}
+
+                    {/* Mobile Submenu */}
+                    {item.subItems && (
+                      <AnimatePresence>
+                        {mobileExpanded === item.name && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="bg-gray-50 overflow-hidden"
+                          >
+                            <div className="flex flex-col py-2">
+                              {item.subItems.map((sub) => {
+                                const IconComponent = sub.icon;
+                                return (
+                                  <Link
+                                    key={sub.name}
+                                    to={sub.href}
+                                    className="flex items-center gap-2 px-8 py-3 text-gray-600 text-base border-b border-gray-100 last:border-0 hover:bg-gray-100"
+                                    onClick={() => setIsOpen(false)}
+                                  >
+                                    {IconComponent && <IconComponent className="w-4 h-4" />}
+                                    {sub.name}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                ))}
+
+                {/* Kundenportal - Mobile */}
+                <div className="border-b border-gray-50 last:border-0">
+                  <div
+                    className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors"
+                    onClick={() => toggleMobileSubmenu('Kundenportal')}
+                  >
+                    <div className="flex items-center gap-2">
+                      <User className="w-5 h-5 text-gray-900" />
+                      <span className="text-lg font-medium text-gray-900">Kundenportal</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-5 h-5 text-gray-400 transition-transform ${mobileExpanded === 'Kundenportal' ? 'rotate-180' : ''}`}
+                    />
+                  </div>
+
+                  {/* Kundenportal Submenu */}
+                  <AnimatePresence>
+                    {mobileExpanded === 'Kundenportal' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="bg-gray-50 overflow-hidden"
+                      >
+                        <div className="flex flex-col py-2">
+                          <a
+                            href="https://sales-kundenportal.ecp.epilot.io/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <UserCircle className="w-4 h-4" />
+                            Privatkunde
+                          </a>
+                          <a
+                            href="https://b2b-demoportal.ecp.epilot.io/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <Building2 className="w-4 h-4" />
+                            Geschäftskunde
+                          </a>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </>
   );
-};
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { LucideIcon, ArrowRight } from 'lucide-react';
 
 interface ProductCardProps {
@@ -24,7 +23,8 @@ export function ProductCard({
   image,
   imageSize = 'w-80 h-80 -mr-28 -mt-28',
 }: ProductCardProps) {
-  const hoverColor = variant === 'netz' ? 'bg-[#63BEF8]' : 'bg-[#deff03]';
+  const hoverBgColor = variant === 'netz' ? 'group-hover:bg-[#63BEF8]' : 'group-hover:bg-[#deff03]';
+  const accentColor = variant === 'netz' ? 'text-[#63BEF8]' : 'text-[#deff03]';
 
   const content = (
     <>
@@ -44,13 +44,15 @@ export function ProductCard({
         </div>
       ) : (
         <div
-          className={`absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -mr-8 -mt-8 transition-transform group-hover:scale-110 ${variant === 'netz' ? 'bg-blue-100' : 'bg-yellow-100'}`}
-        />
+          className={`absolute top-0 right-0 -mr-12 -mt-12 transition-transform group-hover:scale-110 z-0 opacity-30 ${accentColor}`}
+        >
+          <Icon className="w-48 h-48" strokeWidth={1.5} />
+        </div>
       )}
 
       <div className="relative z-10 mb-6">
         <div
-          className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-[#222222] transition-colors duration-300 group-hover:${hoverColor}`}
+          className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-[#222222] transition-colors duration-300 ${hoverBgColor}`}
         >
           <Icon className="w-7 h-7" />
         </div>

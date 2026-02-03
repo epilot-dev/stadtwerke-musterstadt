@@ -7,13 +7,18 @@ import {
   ChevronDown,
   Zap,
   Droplet,
-  ThermometerSun,
   BatteryCharging,
   Flame,
   FileText,
+  Factory,
+  Home,
+  CreditCard,
+  TrendingUp,
+  XCircle,
+  ClipboardList,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Define the Netz navigation structure
 const NETZ_NAV_ITEMS = [
@@ -52,11 +57,19 @@ const NETZ_NAV_ITEMS = [
   {
     name: 'Fernwärme',
     href: '#',
+    subItems: [{ name: 'Verfügbarkeitscheck', href: '/netz/fernwarme/check', icon: Factory }],
+  },
+  {
+    name: 'Service',
+    href: '/service',
     subItems: [
-      { name: 'Verfügbarkeitscheck', href: '/netz/fernwarme/check', icon: ThermometerSun },
+      { name: 'Übersicht', href: '/service', icon: ClipboardList },
+      { name: 'Umzug melden', href: '/service#umzug', icon: Home },
+      { name: 'SEPA-Mandat einrichten', href: '/service#sepa', icon: CreditCard },
+      { name: 'Abschlag anpassen', href: '/service#abschlag', icon: TrendingUp },
+      { name: 'Vertrag kündigen', href: '/service#kuendigung', icon: XCircle },
     ],
   },
-  { name: 'Service', href: '/service' },
   { name: 'Für Installateure', href: 'https://installateur.ecp.epilot.io/', external: true },
 ];
 
@@ -64,7 +77,8 @@ export function NetzNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [selectedSegment, setSelectedSegment] = useState<'vertrieb' | 'netz'>('netz');
+  const [selectedSegment, setSelectedSegment] = useState<'tarif' | 'netz'>('netz');
+  const location = useLocation();
 
   // Track which dropdown is open on desktop (for hover/click)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -102,27 +116,38 @@ export function NetzNavbar() {
     'text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors flex items-center gap-2 cursor-pointer';
   const netzLinkClass = `${baseLinkClass} hover:bg-[#63BEF8] hover:text-black`;
 
+  // Helper function to check if a nav item is active
+  const isNavItemActive = (item: (typeof NETZ_NAV_ITEMS)[0]) => {
+    // Check if the main item href matches (for items like Service that have both href and subItems)
+    if (item.href === location.pathname) {
+      return true;
+    }
+    // Check if any sub-item matches (including hash-based links)
+    if (item.subItems) {
+      return item.subItems.some((sub) => {
+        const subPath = sub.href.split('#')[0]; // Remove hash for comparison
+        return subPath === location.pathname;
+      });
+    }
+    return false;
+  };
+
   return (
     <>
       {/* Spacer to prevent content jump since Navbar is fixed */}
-      <div
-        className={`w-full transition-all duration-300 ${isScrolled ? 'h-16' : 'h-28'}`}
-        aria-hidden="true"
-      />
+      <div className={`w-full h-16 ${isScrolled ? 'xl:h-16' : 'xl:h-28'}`} aria-hidden="true" />
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-gray-100 shadow-sm bg-white`}
-        style={{
-          height: isScrolled ? '64px' : '112px',
-          transition: 'height 300ms',
-        }}
+        className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-gray-100 shadow-sm bg-white h-16 xl:transition-all xl:duration-300 ${
+          isScrolled ? 'xl:h-16' : 'xl:h-28'
+        }`}
       >
         <div
-          className={`transition-transform duration-300 ${isScrolled ? '-translate-y-12' : 'translate-y-0'}`}
+          className={`xl:transition-transform xl:duration-300 ${isScrolled ? 'xl:-translate-y-12' : 'xl:translate-y-0'}`}
         >
-          {/* First Line - Logo and Segmented Control */}
-          <div className="bg-gray-50 border-b border-gray-100 h-12">
-            <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center justify-between">
+          {/* First Line - Logo and Segmented Control (Desktop Only) */}
+          <div className="bg-gray-50 border-b border-gray-100 h-12 hidden xl:block">
+            <div className="container mx-auto max-w-[1440px] px-4 md:px-6 h-full flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <a href="/netz" className="flex items-center w-28">
                   <Logo
@@ -131,50 +156,49 @@ export function NetzNavbar() {
                   />
                 </a>
 
-                {/* Segmented Control - Vertrieb & Netz */}
-                <div className="hidden xl:flex items-center gap-0">
+                {/* Segmented Control - Tarif & Netz */}
+                <div className="flex items-center gap-0">
                   <Link
                     to="/"
-                    className={`group relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
-                      selectedSegment === 'vertrieb'
-                        ? 'text-black'
-                        : 'text-gray-700 hover:text-black'
+                    className={`group relative flex items-center gap-1 px-3 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                      selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
-                    onClick={() => setSelectedSegment('vertrieb')}
+                    onClick={() => setSelectedSegment('tarif')}
                   >
-                    {/* Yellow accent bar - animates from bottom to top */}
+                    {/* Yellow accent bar */}
                     <div
-                      className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#deff03] transition-all duration-300 origin-bottom ${
-                        selectedSegment === 'vertrieb'
-                          ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
+                      className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                        selectedSegment === 'tarif'
+                          ? 'bg-[#deff03] scale-y-100 opacity-100'
+                          : 'bg-[#deff03] scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
                       }`}
                     />
                     <FileText className="w-4 h-4 relative z-10" />
                     <span className="relative z-10">Vertrieb</span>
                   </Link>
-                  <button
-                    className={`relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                  <Link
+                    to="/netz"
+                    className={`relative flex items-center gap-1 px-3 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
                       selectedSegment === 'netz' ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
                     onClick={() => setSelectedSegment('netz')}
                   >
-                    {/* Blue accent bar - animates from bottom to top */}
+                    {/* Blue accent bar */}
                     <div
-                      className={`absolute left-1/2 -translate-x-1/2 top-[65%] -translate-y-1/2 w-[80%] h-3 bg-[#63BEF8] transition-all duration-300 origin-bottom ${
+                      className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
                         selectedSegment === 'netz'
-                          ? 'scale-y-100 opacity-100'
-                          : 'scale-y-0 opacity-0'
+                          ? 'bg-[#63BEF8] scale-y-100 opacity-100'
+                          : 'bg-[#63BEF8] scale-y-0 opacity-0'
                       }`}
                     />
                     <Zap className="w-4 h-4 relative z-10" />
                     <span className="relative z-10">Netz</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
 
               {/* Über uns - Right aligned */}
-              <div className="hidden xl:block">
+              <div>
                 <a
                   href="#"
                   className="text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors hover:text-black"
@@ -187,11 +211,59 @@ export function NetzNavbar() {
 
           {/* Second Line - Navigation Items */}
           <div className="bg-white h-16">
-            <div className="container mx-auto max-w-screen-xl px-4 md:px-6 h-full flex items-center">
-              {/* Logo - appears here when scrolled */}
+            <div className="container mx-auto max-w-[1440px] px-4 md:px-6 h-full flex items-center">
+              {/* Mobile: Logo + Vertrieb/Netz (always visible) */}
+              <a href="/netz" className="flex items-center w-28 xl:hidden mr-1">
+                <Logo
+                  withStripe={true}
+                  stripeColor={selectedSegment === 'netz' ? 'blue' : 'yellow'}
+                />
+              </a>
+
+              {/* Mobile Segment Buttons - Vertrieb & Netz */}
+              <div className="flex xl:hidden items-center gap-0 mr-auto">
+                <Link
+                  to="/"
+                  className={`group relative flex items-center gap-1 px-2 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    selectedSegment === 'tarif' ? 'text-black' : 'text-gray-700 hover:text-black'
+                  }`}
+                  onClick={() => setSelectedSegment('tarif')}
+                >
+                  {/* Yellow accent bar */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                      selectedSegment === 'tarif'
+                        ? 'bg-[#deff03] scale-y-100 opacity-100'
+                        : 'bg-[#deff03] scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100'
+                    }`}
+                  />
+                  <FileText className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Vertrieb</span>
+                </Link>
+                <Link
+                  to="/netz"
+                  className={`relative flex items-center gap-1 px-2 py-3 text-sm font-medium transition-all duration-200 overflow-hidden ${
+                    selectedSegment === 'netz' ? 'text-black' : 'text-gray-700 hover:text-black'
+                  }`}
+                  onClick={() => setSelectedSegment('netz')}
+                >
+                  {/* Blue accent bar */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-[70%] -translate-y-1/2 w-[80%] h-[9px] transition-all duration-300 origin-bottom ${
+                      selectedSegment === 'netz'
+                        ? 'bg-[#63BEF8] scale-y-100 opacity-100'
+                        : 'bg-[#63BEF8] scale-y-0 opacity-0'
+                    }`}
+                  />
+                  <Zap className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Netz</span>
+                </Link>
+              </div>
+
+              {/* Desktop: Logo - appears here when scrolled */}
               <a
                 href="/netz"
-                className={`flex items-center transition-all duration-300 ${
+                className={`hidden xl:flex items-center transition-all duration-300 ${
                   isScrolled ? 'w-28 opacity-100 mr-4' : 'w-0 opacity-0 overflow-hidden'
                 }`}
               >
@@ -221,10 +293,15 @@ export function NetzNavbar() {
                         {item.name}
                       </a>
                     ) : (
-                      <a
-                        href={item.href}
-                        onClick={(e) => item.subItems && e.preventDefault()}
-                        className={`${netzLinkClass} ${activeDropdown === item.name ? 'bg-[#63BEF8] text-black' : ''}`}
+                      <Link
+                        to={item.href}
+                        onClick={(e) => {
+                          // Only prevent default for items with dropdowns that aren't "Service"
+                          if (item.subItems && item.name !== 'Service') {
+                            e.preventDefault();
+                          }
+                        }}
+                        className={`${netzLinkClass} ${isNavItemActive(item) ? 'bg-[rgba(99,190,248,0.4)] text-black' : ''}`}
                       >
                         {item.name}
                         {item.subItems && (
@@ -232,7 +309,7 @@ export function NetzNavbar() {
                             className={`w-3 h-3 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`}
                           />
                         )}
-                      </a>
+                      </Link>
                     )}
 
                     {/* Desktop Dropdown */}
@@ -247,25 +324,22 @@ export function NetzNavbar() {
                           >
                             {item.subItems.map((sub) => {
                               const IconComponent = sub.icon;
-                              if (sub.external) {
-                                return (
-                                  <a
-                                    key={sub.name}
-                                    href={sub.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
-                                  >
-                                    {IconComponent && <IconComponent className="w-4 h-4" />}
-                                    {sub.name}
-                                  </a>
-                                );
-                              }
-                              return (
+                              return sub.external ? (
+                                <a
+                                  key={sub.name}
+                                  href={sub.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
+                                >
+                                  {IconComponent && <IconComponent className="w-4 h-4" />}
+                                  {sub.name}
+                                </a>
+                              ) : (
                                 <Link
                                   key={sub.name}
                                   to={sub.href}
-                                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors"
                                 >
                                   {IconComponent && <IconComponent className="w-4 h-4" />}
                                   {sub.name}
@@ -281,7 +355,7 @@ export function NetzNavbar() {
               </div>
 
               <div className="hidden xl:flex items-center h-full gap-2 ml-auto">
-                {/* Netzkundenportal - direct link */}
+                {/* Netzkundenportal - Simple link without dropdown */}
                 <a
                   href="https://netz.ecp.epilot.io/"
                   target="_blank"
@@ -294,11 +368,14 @@ export function NetzNavbar() {
               </div>
 
               {/* Mobile Toggle */}
-              <button
-                className="xl:hidden p-2 text-gray-700 ml-auto"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? <X /> : <Menu />}
+              <button className="xl:hidden p-2 text-gray-700" onClick={() => setIsOpen(!isOpen)}>
+                <motion.div
+                  initial={false}
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                  {isOpen ? <X /> : <Menu />}
+                </motion.div>
               </button>
             </div>
           </div>
@@ -314,15 +391,9 @@ export function NetzNavbar() {
               >
                 <div className="flex flex-col py-2">
                   {NETZ_NAV_ITEMS.map((item) => (
-                    <div
-                      key={item.name}
-                      className="group relative border-b border-gray-50 last:border-0"
-                    >
-                      {/* Hover Bar - Blue */}
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#63BEF8] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-
+                    <div key={item.name} className="border-b border-gray-50 last:border-0">
                       <div
-                        className="flex items-center justify-between px-6 py-4 cursor-pointer"
+                        className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors"
                         onClick={() => {
                           if (item.external) {
                             window.open(item.href, '_blank');
@@ -388,6 +459,20 @@ export function NetzNavbar() {
                       )}
                     </div>
                   ))}
+
+                  {/* Netzkundenportal - Mobile */}
+                  <div className="border-b border-gray-50 last:border-0">
+                    <a
+                      href="https://netz.ecp.epilot.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <User className="w-5 h-5 text-gray-900" />
+                      <span className="text-lg font-medium text-gray-900">Netzkundenportal</span>
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             )}

@@ -1,8 +1,6 @@
 import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
-import { HeroSection } from '@/app/components/HeroSection';
-import { ProductCard } from '@/app/components/ProductCard';
-import { ThermometerSun } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
 
 export default function FernwarmeCheck() {
   return (
@@ -10,17 +8,40 @@ export default function FernwarmeCheck() {
       <NetzNavbar />
 
       <main>
-        <HeroSection
-          title="Fernwärme Verfügbarkeitscheck"
-          description="Prüfen Sie, ob Fernwärme an Ihrer Adresse verfügbar ist. Umweltfreundlich heizen mit der Kraft der Kraft-Wärme-Kopplung."
-          imageSrc="https://images.unsplash.com/photo-1767789083299-28d17c4ffb7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXN0cmljdCUyMGhlYXRpbmclMjBwbGFudHxlbnwxfHx8fDE3Njk0MTc5Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          imageAlt="District heating infrastructure"
-          variant="netz"
-        />
+        {/* Full-width Hero Section */}
+        <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-white flex justify-center">
+          {/* Background Image - constrained to 1920px */}
+          <div className="absolute inset-0 flex justify-center bg-white">
+            <div className="w-full max-w-[1920px] h-full relative">
+              <img
+                src="/fernwarme-grid.png"
+                alt="District heating infrastructure"
+                className="w-full h-full object-cover"
+              />
+              {/* Blue Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent"></div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="relative h-full w-full max-w-[1920px] mx-auto">
+            <div className="container mx-auto max-w-[1440px] px-4 md:px-6 flex items-center h-full">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                  Fernwärme Verfügbarkeitscheck
+                </h1>
+                <p className="text-lg md:text-xl text-white/95 leading-relaxed">
+                  Prüfen Sie, ob Fernwärme an Ihrer Adresse verfügbar ist. Umweltfreundlich heizen
+                  mit der Kraft der Kraft-Wärme-Kopplung.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Verfügbarkeitscheck Section with Embedded Journey */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
+        <section className="py-12 md:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Ist Fernwärme bei Ihnen verfügbar?
@@ -49,29 +70,26 @@ export default function FernwarmeCheck() {
         </section>
 
         {/* Portal Card Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
+        <section className="py-12 md:py-20 lg:py-24 bg-gray-50">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Anschluss direkt beantragen
               </h2>
-              <p className="text-lg text-gray-600">
-                Sie haben sich für Fernwärme entschieden? Beantragen Sie Ihren Anschluss jetzt
-                online.
+              <p className="text-lg text-gray-600 mb-8">
+                Sie möchten einen Fernwärmeanschluss beantragen? Starten Sie Ihren Antrag bequem
+                online in unserem Netzkundenportal. Der Prozess führt Sie Schritt für Schritt durch
+                alle notwendigen Angaben und Sie können alle erforderlichen Unterlagen direkt
+                hochladen.
               </p>
-            </div>
-
-            {/* Portal Card */}
-            <div className="max-w-2xl mx-auto">
-              <ProductCard
-                title="Fernwärmeanschluss im Portal beantragen"
-                description="Stellen Sie Ihren Antrag für einen Fernwärmeanschluss bequem online in unserem Netzkundenportal. Alle erforderlichen Unterlagen können Sie direkt hochladen."
-                icon={ThermometerSun}
-                href="https://netz.ecp.epilot.io/"
-                cta="Jetzt beantragen"
-                variant="netz"
-                external={true}
-              />
+              <Button
+                asChild
+                className="bg-[#63BEF8] hover:bg-[#63BEF8] text-black h-12 px-8 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,190,248,0.8)]"
+              >
+                <a href="https://netz.ecp.epilot.io/" target="_blank" rel="noopener noreferrer">
+                  Zum Kundenportal
+                </a>
+              </Button>
             </div>
           </div>
         </section>

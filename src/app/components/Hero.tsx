@@ -159,7 +159,7 @@ export function Hero() {
           className={cn(
             isFullscreen
               ? 'w-full max-w-screen-lg mx-auto px-0 md:px-6 md:py-12'
-              : 'w-full max-w-md rounded-3xl shadow-2xl bg-[#f9fafb] pb-6'
+              : 'w-full max-w-md rounded-3xl shadow-2xl bg-white pb-6'
           )}
         >
           {!isFullscreen && (

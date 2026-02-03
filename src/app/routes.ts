@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { HomePage } from '@/app/pages/Home';
+
+import { Root } from '@/app/components/Root';
 import Okostrom from '@/app/pages/Okostrom';
 import Gas from '@/app/pages/Gas';
 import Warmestrom from '@/app/pages/Warmestrom';
@@ -18,62 +20,68 @@ import FernwarmeCheck from '@/app/pages/netz/FernwarmeCheck';
 export const router = createBrowserRouter([
   {
     path: '/',
-    Component: HomePage,
-  },
-  {
-    path: '/okostrom',
-    Component: Okostrom,
-  },
-  {
-    path: '/gas',
-    Component: Gas,
-  },
-  {
-    path: '/warmestrom',
-    Component: Warmestrom,
-  },
-  {
-    path: '/warmepumpe',
-    Component: Warmepumpe,
-  },
-  {
-    path: '/fernwarme',
-    Component: Fernwarme,
-  },
-  {
-    path: '/ladestrom',
-    Component: Ladestrom,
-  },
-  {
-    path: '/wallbox',
-    Component: Wallbox,
-  },
-  {
-    path: '/photovoltaik',
-    Component: Photovoltaik,
-  },
-  {
-    path: '/balkonkraftwerke',
-    Component: Balkonkraftwerke,
-  },
-  {
-    path: '/service',
-    Component: ServicePage,
-  },
-  {
-    path: '/netz',
-    Component: Netz,
-  },
-  {
-    path: '/netz/strom/einspeiser',
-    Component: StromEinspeiser,
-  },
-  {
-    path: '/netz/wasser/anschluss',
-    Component: WasserAnschluss,
-  },
-  {
-    path: '/netz/fernwarme/check',
-    Component: FernwarmeCheck,
+    Component: Root,
+    children: [
+      {
+        index: true,
+        Component: HomePage,
+      },
+      {
+        path: 'okostrom',
+        Component: Okostrom,
+      },
+      {
+        path: 'gas',
+        Component: Gas,
+      },
+      {
+        path: 'warmestrom',
+        Component: Warmestrom,
+      },
+      {
+        path: 'warmepumpe',
+        Component: Warmepumpe,
+      },
+      {
+        path: 'fernwarme',
+        Component: Fernwarme,
+      },
+      {
+        path: 'ladestrom',
+        Component: Ladestrom,
+      },
+      {
+        path: 'wallbox',
+        Component: Wallbox,
+      },
+      {
+        path: 'photovoltaik',
+        Component: Photovoltaik,
+      },
+      {
+        path: 'balkonkraftwerke',
+        Component: Balkonkraftwerke,
+      },
+      {
+        path: 'service',
+        Component: ServicePage,
+      },
+      {
+        path: 'netz',
+        Component: Netz,
+      },
+      {
+        path: 'netz/strom/einspeiser',
+        Component: StromEinspeiser,
+      },
+      {
+        path: 'netz/wasser/anschluss',
+        Component: WasserAnschluss,
+      },
+      {
+        path: 'netz/fernwarme/check',
+        Component: FernwarmeCheck,
+      },
+    ],
   },
 ]);
