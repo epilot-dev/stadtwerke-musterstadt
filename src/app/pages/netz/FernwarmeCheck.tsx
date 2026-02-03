@@ -1,6 +1,8 @@
 import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
 import { Button } from '@/app/components/ui/button';
+import JourneyWebComponent from '@/app/components/JourneyComponent';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function FernwarmeCheck() {
   return (
@@ -54,16 +56,8 @@ export default function FernwarmeCheck() {
 
             {/* Embedded Journey */}
             <div className="max-w-5xl mx-auto mb-16">
-              <div className="bg-gray-50 rounded-3xl shadow-lg overflow-hidden border border-gray-200">
-                <div className="w-full">
-                  <iframe
-                    src="https://journey.epilot.cloud/fernwaerme-verfuegbarkeit"
-                    className="w-full h-full"
-                    style={{ minHeight: '600px', height: '600px' }}
-                    frameBorder="0"
-                    title="Fernwärme Verfügbarkeitscheck"
-                  />
-                </div>
+              <div className="w-full">
+                <JourneyWebComponent journeyId={JOURNEY_IDS.fernwarmeGrid} isPage />
               </div>
             </div>
           </div>

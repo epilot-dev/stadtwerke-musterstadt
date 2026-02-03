@@ -85,7 +85,7 @@ export function Hero() {
       className={cn(
         'relative w-full',
         isFullscreen
-          ? 'min-h-screen bg-white'
+          ? 'min-h-screen bg-[#f9fafb]'
           : 'min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gray-900 overflow-hidden'
       )}
     >
@@ -105,19 +105,6 @@ export function Hero() {
             loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
-        </motion.div>
-      )}
-
-      {isFullscreen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm"
-        >
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6 py-4 flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-900">Tarif berechnen</h2>
-          </div>
         </motion.div>
       )}
 

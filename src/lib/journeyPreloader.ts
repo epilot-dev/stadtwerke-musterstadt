@@ -17,6 +17,8 @@ export const JOURNEY_IDS = {
   sepa: '72e3df50-fdc0-11f0-81ef-3f7d145b7846',
   abschlag: 'c0510a10-fdc0-11f0-a146-199ca6319320',
   kuendigung: 'c4c8eae0-fdf2-11f0-b1a3-71011c03c2f1',
+  // Grid journeys
+  fernwarmeGrid: '86f5bc40-7f2e-11f0-bc8c-7f288bdddcc4',
 } as const;
 
 export type JourneyKey = keyof typeof JOURNEY_IDS;
