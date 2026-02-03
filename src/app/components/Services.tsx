@@ -99,9 +99,11 @@ export function Services() {
               </p>
             </div>
 
-            <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold transition-all duration-300 relative z-10 cursor-pointer hover:bg-[#deff03] hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]">
-              Kontakt aufnehmen
-            </button>
+            <a href="https://www.epilot.cloud/en/demo" target="_blank" rel="noopener noreferrer">
+              <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold transition-all duration-300 relative z-10 cursor-pointer hover:bg-[#deff03] hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]">
+                Kontakt aufnehmen
+              </button>
+            </a>
           </div>
         </div>
       </div>

@@ -149,12 +149,12 @@ export function NetzNavbar() {
           <div className="bg-gray-50 border-b border-gray-100 h-12 hidden xl:block">
             <div className="container mx-auto max-w-[1440px] px-4 md:px-6 h-full flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <a href="/netz" className="flex items-center w-28">
+                <Link to="/netz" className="flex items-center w-28">
                   <Logo
                     withStripe={true}
                     stripeColor={selectedSegment === 'netz' ? 'blue' : 'yellow'}
                   />
-                </a>
+                </Link>
 
                 {/* Segmented Control - Tarif & Netz */}
                 <div className="flex items-center gap-0">

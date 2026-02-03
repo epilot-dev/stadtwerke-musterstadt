@@ -1,8 +1,6 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar } from '@/app/components/Navbar';
 import { Footer } from '@/app/components/Footer';
-import { ProductCard } from '@/app/components/ProductCard';
-import { ContactSection } from '@/app/components/ContactSection';
 import {
   Home,
   TrendingUp,
@@ -26,7 +24,7 @@ const serviceCards = [
     icon: Home,
     color: 'bg-blue-100',
     iconColor: 'text-blue-600',
-    href: '#umzug',
+    href: '/service/umzug',
     cta: 'Jetzt melden',
   },
   {
@@ -35,7 +33,7 @@ const serviceCards = [
     icon: CreditCard,
     color: 'bg-green-100',
     iconColor: 'text-green-600',
-    href: '#sepa',
+    href: '/service/sepa',
     cta: 'Mandat einrichten',
   },
   {
@@ -44,7 +42,7 @@ const serviceCards = [
     icon: TrendingUp,
     color: 'bg-purple-100',
     iconColor: 'text-purple-600',
-    href: '#abschlag',
+    href: '/service/abschlag',
     cta: 'Jetzt anpassen',
   },
   {
@@ -54,7 +52,7 @@ const serviceCards = [
     icon: XCircle,
     color: 'bg-red-100',
     iconColor: 'text-red-600',
-    href: '#kuendigung',
+    href: '/service/kuendigung',
     cta: 'Kündigung einreichen',
   },
 ];
@@ -79,9 +77,9 @@ export function ServicePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {serviceCards.map((service, index) => (
-                <a
+                <Link
                   key={index}
-                  href={service.href}
+                  to={service.href}
                   className="group relative flex flex-col p-8 bg-gray-50 rounded-3xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
                 >
                   <div
@@ -106,7 +104,7 @@ export function ServicePage() {
                     {service.cta}{' '}
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </div>
-                </a>
+                </Link>
               ))}
 
               {/* Kundenportal Login Card */}
@@ -126,9 +124,15 @@ export function ServicePage() {
                   </p>
                 </div>
 
-                <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold transition-all duration-300 relative z-10 cursor-pointer hover:bg-[#deff03] hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]">
-                  Zum Kundenportal
-                </button>
+                <a
+                  href="https://sales-kundenportal.ecp.epilot.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="w-full py-4 rounded-full bg-white text-[#222222] font-bold transition-all duration-300 relative z-10 cursor-pointer hover:bg-[#deff03] hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]">
+                    Zum Kundenportal
+                  </button>
+                </a>
               </div>
             </div>
           </div>

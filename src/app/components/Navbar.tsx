@@ -68,10 +68,10 @@ const NAV_ITEMS = [
     href: '/service',
     subItems: [
       { name: 'Übersicht', href: '/service', icon: ClipboardList },
-      { name: 'Umzug melden', href: '/service#umzug', icon: Home },
-      { name: 'SEPA-Mandat einrichten', href: '/service#sepa', icon: CreditCard },
-      { name: 'Abschlag anpassen', href: '/service#abschlag', icon: TrendingUp },
-      { name: 'Vertrag kündigen', href: '/service#kuendigung', icon: XCircle },
+      { name: 'Umzug melden', href: '/service/umzug', icon: Home },
+      { name: 'SEPA-Mandat einrichten', href: '/service/sepa', icon: CreditCard },
+      { name: 'Abschlag anpassen', href: '/service/abschlag', icon: TrendingUp },
+      { name: 'Vertrag kündigen', href: '/service/kuendigung', icon: XCircle },
     ],
   },
 ];

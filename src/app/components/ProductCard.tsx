@@ -1,4 +1,5 @@
 import { LucideIcon, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   title: string;
@@ -80,8 +81,8 @@ export function ProductCard({
   }
 
   return (
-    <a href={href} className={className}>
+    <Link to={href} className={className}>
       {content}
-    </a>
+    </Link>
   );
 }

@@ -170,29 +170,29 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <a href="/service#umzug" className={`${hoverColor} transition-colors`}>
+                <Link to="/service#umzug" className={`${hoverColor} transition-colors`}>
                   Umzug melden
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/service#sepa" className={`${hoverColor} transition-colors`}>
+                <Link to="/service#sepa" className={`${hoverColor} transition-colors`}>
                   SEPA-Mandat einrichten
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/service#abschlag" className={`${hoverColor} transition-colors`}>
+                <Link to="/service#abschlag" className={`${hoverColor} transition-colors`}>
                   Abschlag anpassen
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/service#kuendigung" className={`${hoverColor} transition-colors`}>
+                <Link to="/service#kuendigung" className={`${hoverColor} transition-colors`}>
                   Vertrag kündigen
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className={`${hoverColor} transition-colors`}>
+                <Link to="#" className={`${hoverColor} transition-colors`}>
                   Kundenportal
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -226,15 +226,15 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>© 2026 2PUNKT0 AG</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white">
+            <Link to="#" className="hover:text-white">
               Impressum
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+            <Link to="#" className="hover:text-white">
               Datenschutz
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+            <Link to="#" className="hover:text-white">
               AGB
-            </a>
+            </Link>
           </div>
         </div>
       </div>

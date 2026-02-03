@@ -12,6 +12,10 @@ import Wallbox from '@/app/pages/Wallbox';
 import Photovoltaik from '@/app/pages/Photovoltaik';
 import Balkonkraftwerke from '@/app/pages/Balkonkraftwerke';
 import { ServicePage } from '@/app/pages/ServicePage';
+import Umzug from '@/app/pages/Umzug';
+import Sepa from '@/app/pages/Sepa';
+import Abschlag from '@/app/pages/Abschlag';
+import Kuendigung from '@/app/pages/Kuendigung';
 import Netz from '@/app/pages/Netz';
 import StromEinspeiser from '@/app/pages/netz/StromEinspeiser';
 import WasserAnschluss from '@/app/pages/netz/WasserAnschluss';
@@ -65,6 +69,22 @@ export const router = createBrowserRouter([
       {
         path: 'service',
         Component: ServicePage,
+      },
+      {
+        path: 'service/umzug',
+        Component: Umzug,
+      },
+      {
+        path: 'service/sepa',
+        Component: Sepa,
+      },
+      {
+        path: 'service/abschlag',
+        Component: Abschlag,
+      },
+      {
+        path: 'service/kuendigung',
+        Component: Kuendigung,
       },
       {
         path: 'netz',
