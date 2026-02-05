@@ -53,7 +53,6 @@ export function Hero() {
     // If the first step is not loaded, set it to loaded and return
     if (!firstStepLoaded) {
       firstStepsRef.current.set(journeyId, { isLoaded: true, path });
-      console.log('[Hero] Registered first step for journey', { journeyId, path });
       return;
     }
 
