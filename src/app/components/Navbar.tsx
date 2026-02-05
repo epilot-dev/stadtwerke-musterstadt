@@ -226,7 +226,9 @@ export function Navbar() {
               {/* Über uns - Right aligned */}
               <div>
                 <a
-                  href="#"
+                  href="https://www.epilot.cloud/en/company/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm font-medium text-gray-700 px-4 py-2 rounded-full transition-colors hover:text-black"
                 >
                   Über uns
