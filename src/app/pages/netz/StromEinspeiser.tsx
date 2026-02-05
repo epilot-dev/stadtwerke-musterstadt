@@ -13,7 +13,7 @@ export default function StromEinspeiser() {
         <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-white flex justify-center">
           {/* Background Image - constrained to 1920px */}
           <div className="absolute inset-0 flex justify-center bg-white">
-            <div className="w-full max-w-[1920px] h-full relative">
+            <div className="w-full h-full relative">
               <img
                 src="/strom-grid.png"
                 alt="Renewable Energy Infrastructure - Solar Panels and Wind Turbines"

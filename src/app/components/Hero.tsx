@@ -84,7 +84,7 @@ export function Hero() {
       className={cn(
         'relative w-full',
         isFullscreen
-          ? 'min-h-screen bg-[#f9fafb]'
+          ? 'bg-[#f9fafb]'
           : 'min-h-[600px] lg:min-h-[700px] py-12 md:py-8 flex items-center bg-gray-900 overflow-hidden'
       )}
     >
@@ -133,7 +133,7 @@ export function Hero() {
             <div className="flex flex-wrap gap-4">
               <Button
                 asChild
-                className="bg-[#deff03] hover:bg-[#cbe600] text-black h-12 px-8 rounded-full text-lg font-semibold"
+                className="bg-[#deff03] hover:bg-[#deff03] text-black h-12 px-8 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(222,255,3,0.8)]"
               >
                 <a href="#products">Produkte entdecken</a>
               </Button>

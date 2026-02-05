@@ -10,7 +10,7 @@ export function NetzHero() {
     <section className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden bg-white py-12 md:py-0">
       {/* Background Image - constrained to 1920px */}
       <motion.div className="absolute inset-0 z-0 flex justify-center bg-white" style={{ y }}>
-        <div className="w-full max-w-[1920px] h-full relative">
+        <div className="w-full h-full relative">
           <img
             src="/grid-hero.png"
             alt="Smart Grid Infrastructure"

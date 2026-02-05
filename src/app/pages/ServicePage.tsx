@@ -64,8 +64,8 @@ export function ServicePage() {
 
       <main className="flex-grow">
         {/* Service Cards Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
+        <section className="py-12 md:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-[#222222] mb-4">
                 Wie können wir Ihnen helfen?
@@ -83,8 +83,10 @@ export function ServicePage() {
                   className="group relative flex flex-col p-8 bg-gray-50 rounded-3xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
                 >
                   <div
-                    className={`absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -mr-8 -mt-8 transition-transform group-hover:scale-110 ${service.color}`}
-                  />
+                    className={`absolute top-0 right-0 -mr-12 -mt-12 transition-transform group-hover:scale-110 z-0 opacity-30 ${service.iconColor}`}
+                  >
+                    <service.icon className="w-48 h-48" strokeWidth={1.5} />
+                  </div>
 
                   <div className="relative z-10 mb-6">
                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-[#222222] transition-colors duration-300 group-hover:bg-[#deff03]">
@@ -179,8 +181,8 @@ export function ServicePage() {
         </section>
 
         {/* Future of Service Banner */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
+        <section className="py-12 md:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
             <div className="bg-[#222222] rounded-3xl p-12 relative overflow-hidden">
               {/* Neon green glow from bottom right */}
               <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#deff03] rounded-full blur-[120px] opacity-20 translate-x-1/3 translate-y-1/3" />
@@ -195,7 +197,7 @@ export function ServicePage() {
                 {/* Technical Prototype */}
                 <a
                   href="#platform-prototype"
-                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 border border-white/10"
+                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
                 >
                   <Cpu className="w-5 h-5 text-[#deff03]" />
                   <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">
@@ -207,7 +209,7 @@ export function ServicePage() {
                 {/* Mid 2025 */}
                 <a
                   href="#figma-mid-2025"
-                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 border border-white/10"
+                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
                 >
                   <Calendar className="w-5 h-5 text-[#deff03]" />
                   <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">
@@ -219,7 +221,7 @@ export function ServicePage() {
                 {/* In the further future */}
                 <a
                   href="#figma-future"
-                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 border border-white/10"
+                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
                 >
                   <Sparkles className="w-5 h-5 text-[#deff03]" />
                   <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">

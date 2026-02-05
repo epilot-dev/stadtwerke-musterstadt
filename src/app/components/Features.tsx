@@ -43,7 +43,7 @@ export function Features() {
                 {/* Icon with graphical circle accent */}
                 <div className="relative mb-8">
                   <div className="absolute inset-0 bg-[#deff03] rounded-full scale-110 translate-x-1 translate-y-1 opacity-100" />
-                  <div className="relative z-10 w-24 h-24 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                  <div className="relative w-24 h-24 bg-white border-2 border-black rounded-full flex items-center justify-center">
                     <Icon className="w-10 h-10 text-black" strokeWidth={1.5} />
                   </div>
                 </div>

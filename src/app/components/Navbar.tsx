@@ -30,17 +30,17 @@ import { Link, useLocation } from 'react-router-dom';
 const NAV_ITEMS = [
   {
     name: 'Strom & Gas',
-    href: '#',
+    href: '/#',
     subItems: [
-      { name: 'Ökostrom', href: '/okostrom', icon: Leaf },
-      { name: 'Gas', href: '/gas', icon: Flame },
+      { name: 'Ökostrom', href: '/', icon: Leaf },
+      { name: 'Gas', href: '/', icon: Flame },
       { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
       { name: 'Ladestrom', href: '/ladestrom', icon: BatteryCharging },
     ],
   },
   {
     name: 'Wärme',
-    href: '#',
+    href: '/#',
     subItems: [
       { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
       { name: 'Wärmepumpe', href: '/warmepumpe', icon: Heater },
@@ -49,7 +49,7 @@ const NAV_ITEMS = [
   },
   {
     name: 'E-Mobilität',
-    href: '#',
+    href: '/#',
     subItems: [
       { name: 'Ladestrom', href: '/ladestrom', icon: BatteryCharging },
       { name: 'Wallbox', href: '/wallbox', icon: PlugZap },
@@ -57,7 +57,7 @@ const NAV_ITEMS = [
   },
   {
     name: 'Solar',
-    href: '#',
+    href: '/#',
     subItems: [
       { name: 'Photovoltaik', href: '/photovoltaik', icon: Sun },
       { name: 'Balkonkraftwerke', href: '/balkonkraftwerke', icon: Zap },
