@@ -110,7 +110,7 @@ export function Hero() {
       {/* Main Content Container */}
       <div
         className={cn(
-          'relative z-10',
+          'relative',
           isFullscreen
             ? 'w-full'
             : 'container mx-auto max-w-screen-xl px-4 md:px-6 flex flex-col lg:flex-row items-center gap-12'
