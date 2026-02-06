@@ -22,6 +22,7 @@ import {
   TrendingUp,
   XCircle,
   ClipboardList,
+  RouterIcon,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
@@ -62,6 +63,11 @@ const NAV_ITEMS = [
       { name: 'Photovoltaik', href: '/photovoltaik', icon: Sun },
       { name: 'Balkonkraftwerke', href: '/balkonkraftwerke', icon: Zap },
     ],
+  },
+  {
+    name: 'Breitband',
+    href: '/#',
+    subItems: [{ name: 'Glasfaser', href: '/glasfaser', icon: RouterIcon }],
   },
   {
     name: 'Service',

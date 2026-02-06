@@ -20,6 +20,7 @@ import Netz from '@/app/pages/Netz';
 import StromEinspeiser from '@/app/pages/netz/StromEinspeiser';
 import WasserAnschluss from '@/app/pages/netz/WasserAnschluss';
 import FernwarmeCheck from '@/app/pages/netz/FernwarmeCheck';
+import Glasfaser from '@/app/pages/Glasfaser';
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: 'balkonkraftwerke',
         Component: Balkonkraftwerke,
+      },
+      {
+        path: 'glasfaser',
+        Component: Glasfaser,
       },
       {
         path: 'service',

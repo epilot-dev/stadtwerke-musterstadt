@@ -2,6 +2,8 @@ import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
 import { ProductCard } from '@/app/components/ProductCard';
 import { Droplet, Construction } from 'lucide-react';
+import JourneyWebComponent from '@/app/components/JourneyComponent';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function WasserAnschluss() {
   return (
@@ -35,6 +37,18 @@ export default function WasserAnschluss() {
                   Sie planen einen Neubau oder benötigen einen neuen Wasseranschluss? Wir kümmern
                   uns um die fachgerechte Umsetzung und stehen Ihnen beratend zur Seite.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Verfügbarkeitscheck Section with Embedded Journey */}
+        <section className="py-12 md:pt-16 md:pb-8 lg:py-20 lg:pb-8 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
+            {/* Embedded Journey */}
+            <div className="max-w-5xl mx-auto">
+              <div className="w-full">
+                <JourneyWebComponent journeyId={JOURNEY_IDS.general} isPage />
               </div>
             </div>
           </div>

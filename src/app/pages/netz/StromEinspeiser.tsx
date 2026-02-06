@@ -2,6 +2,8 @@ import { NetzNavbar } from '@/app/components/NetzNavbar';
 import { Footer } from '@/app/components/Footer';
 import { ProductCard } from '@/app/components/ProductCard';
 import { BatteryCharging, LineChart } from 'lucide-react';
+import JourneyWebComponent from '@/app/components/JourneyComponent';
+import { JOURNEY_IDS } from '@/lib/journeyPreloader';
 
 export default function StromEinspeiser() {
   return (
@@ -36,6 +38,18 @@ export default function StromEinspeiser() {
                   den gesamten Prozess. Melden Sie Ihre Anlage an oder teilen Sie uns Ihren
                   Zählerstand mit.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Verfügbarkeitscheck Section with Embedded Journey */}
+        <section className="py-12 md:pt-16 md:pb-8 lg:pt-20 lg:pb-8 bg-white">
+          <div className="container mx-auto max-w-[1440px] px-4 md:px-6">
+            {/* Embedded Journey */}
+            <div className="max-w-5xl mx-auto">
+              <div className="w-full">
+                <JourneyWebComponent journeyId={JOURNEY_IDS.general} isPage />
               </div>
             </div>
           </div>

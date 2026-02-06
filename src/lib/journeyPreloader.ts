@@ -12,6 +12,7 @@ export const JOURNEY_IDS = {
   photovoltaik: '4fa8b7d0-f6eb-11f0-999c-9303fbefac6f',
   balkonkraftwerke: '8d321a90-fdbe-11f0-a4a6-6f54fcf2a600',
   fernwarme: '67cd2783-c5a6-4a61-b3c9-e4076eb723b3',
+  glasfaser: '9c274f86-3220-4b9f-8795-cbda978e515a',
   // Service pages
   umzug: '34ecfce0-fdc0-11f0-86ba-f186dac4fe27',
   sepa: '72e3df50-fdc0-11f0-81ef-3f7d145b7846',
@@ -19,6 +20,7 @@ export const JOURNEY_IDS = {
   kuendigung: 'c4c8eae0-fdf2-11f0-b1a3-71011c03c2f1',
   // Grid journeys
   fernwarmeGrid: '86f5bc40-7f2e-11f0-bc8c-7f288bdddcc4',
+  general: 'c105d6b0-ef67-11ef-9e20-9ba290989093',
 } as const;
 
 export type JourneyKey = keyof typeof JOURNEY_IDS;
