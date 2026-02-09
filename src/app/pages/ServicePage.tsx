@@ -193,7 +193,7 @@ export function ServicePage() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto relative z-10 justify-center items-center">
                 {/* Technical Prototype */}
                 <a
                   href="https://www.figma.com/proto/k4DryxpriBrsU7D0wVauum/ServiceL_Usertesting_prototype_detached?node-id=0-1&p=f&viewport=-3107%2C-2972%2C0.16&t=U7R6hLRb1oVrqPBM-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A25938&show-proto-sidebar=1"
