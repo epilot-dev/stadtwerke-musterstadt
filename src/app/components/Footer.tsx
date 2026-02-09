@@ -94,6 +94,26 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
                   Balkonkraftwerke
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://portal.epilot.cloud/journey-app/?journeyId=752b9906-5590-4a8b-b3d1-060b7d810c5b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${hoverColor} transition-colors`}
+                >
+                  Easter Egg 1
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://portal.epilot.cloud/journey-app/?journeyId=2825ce00-02ad-11f1-94b7-6b78fa224907"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${hoverColor} transition-colors`}
+                >
+                  Easter Egg 2
+                </a>
+              </li>
             </ul>
           </div>
 
