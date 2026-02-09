@@ -101,7 +101,7 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
                   rel="noopener noreferrer"
                   className={`${hoverColor} transition-colors`}
                 >
-                  Easter Egg 1
+                  Fortgeschrittenes Journey-Design 1
                 </a>
               </li>
               <li>
@@ -111,7 +111,7 @@ export function Footer({ variant = 'tarif' }: FooterProps) {
                   rel="noopener noreferrer"
                   className={`${hoverColor} transition-colors`}
                 >
-                  Easter Egg 2
+                  Fortgeschrittenes Journey-Design 2
                 </a>
               </li>
             </ul>
