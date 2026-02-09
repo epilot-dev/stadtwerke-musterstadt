@@ -21,6 +21,7 @@ import StromEinspeiser from '@/app/pages/netz/StromEinspeiser';
 import WasserAnschluss from '@/app/pages/netz/WasserAnschluss';
 import FernwarmeCheck from '@/app/pages/netz/FernwarmeCheck';
 import Glasfaser from '@/app/pages/Glasfaser';
+import Warmelosungen from './pages/Warmelosungen';
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: 'glasfaser',
         Component: Glasfaser,
+      },
+      {
+        path: 'warmelosungen',
+        Component: Warmelosungen,
       },
       {
         path: 'service',

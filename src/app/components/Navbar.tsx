@@ -23,6 +23,7 @@ import {
   XCircle,
   ClipboardList,
   RouterIcon,
+  FlameKindling,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
@@ -43,8 +44,9 @@ const NAV_ITEMS = [
     name: 'Wärme',
     href: '/#',
     subItems: [
-      { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
+      { name: 'Wärmelösungen', href: '/warmelosungen', icon: FlameKindling },
       { name: 'Wärmepumpe', href: '/warmepumpe', icon: Heater },
+      { name: 'Wärmestrom', href: '/warmestrom', icon: ThermometerSun },
       { name: 'Fernwärme', href: '/fernwarme', icon: Factory },
     ],
   },

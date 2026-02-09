@@ -11,11 +11,6 @@ import {
   Flame,
   FileText,
   Factory,
-  Home,
-  CreditCard,
-  TrendingUp,
-  XCircle,
-  ClipboardList,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';

@@ -13,6 +13,7 @@ export const JOURNEY_IDS = {
   balkonkraftwerke: '8d321a90-fdbe-11f0-a4a6-6f54fcf2a600',
   fernwarme: '67cd2783-c5a6-4a61-b3c9-e4076eb723b3',
   glasfaser: '9c274f86-3220-4b9f-8795-cbda978e515a',
+  warmelosungen: 'a2fc2fb0-fd2c-11f0-a79d-a193d8c6f1a5',
   // Service pages
   umzug: '34ecfce0-fdc0-11f0-86ba-f186dac4fe27',
   sepa: '72e3df50-fdc0-11f0-81ef-3f7d145b7846',
