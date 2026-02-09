@@ -196,36 +196,28 @@ export function ServicePage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto relative z-10">
                 {/* Technical Prototype */}
                 <a
-                  href="#platform-prototype"
+                  href="https://www.figma.com/proto/k4DryxpriBrsU7D0wVauum/ServiceL_Usertesting_prototype_detached?node-id=0-1&p=f&viewport=-3107%2C-2972%2C0.16&t=U7R6hLRb1oVrqPBM-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A25938&show-proto-sidebar=1"
                   className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Cpu className="w-5 h-5 text-[#deff03]" />
                   <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">
-                    Technical Prototype
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#deff03] opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-
-                {/* Mid 2025 */}
-                <a
-                  href="#figma-mid-2025"
-                  className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
-                >
-                  <Calendar className="w-5 h-5 text-[#deff03]" />
-                  <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">
-                    Mid 2025
+                    Q2 Service MVP
                   </span>
                   <ArrowRight className="w-4 h-4 text-[#deff03] opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
 
                 {/* In the further future */}
                 <a
-                  href="#figma-future"
+                  href="https://www.figma.com/proto/VTDFdH7t6fhS2AOTW41rmw/2026-service-vision?node-id=102-41855&p=f&viewport=-156%2C-198%2C0.28&t=HGCvlF5HzFfvhQwX-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=102%3A44266&show-proto-sidebar=1"
                   className="group flex items-center justify-center gap-3 p-4 bg-white/5 rounded-full transition-all duration-300 hover:bg-white/10 border border-white/10"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Sparkles className="w-5 h-5 text-[#deff03]" />
                   <span className="font-bold text-white group-hover:text-[#deff03] transition-colors">
-                    In the further future
+                    Service Vision
                   </span>
                   <ArrowRight className="w-4 h-4 text-[#deff03] opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>

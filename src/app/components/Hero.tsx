@@ -97,7 +97,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
         >
           <motion.img
-            src="/hero.png"
+            src="/hero.webp"
             alt="Modern sustainable city"
             className="w-full h-full object-cover"
             style={{ opacity }}
