@@ -4,7 +4,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Logo } from './Logo';
 import { Lock, ArrowRight, AlertCircle } from 'lucide-react';
-import { PASSKEY, storage, STORAGE_KEY } from '@/utils';
+import { PASSKEY, PASSKEY_2, storage, STORAGE_KEY } from '@/utils';
 
 interface PasskeyGateProps {
   children: React.ReactNode;
@@ -29,7 +29,7 @@ export function PasskeyGate({ children }: PasskeyGateProps) {
     e.preventDefault();
     setError('');
 
-    if (passkey === PASSKEY) {
+    if (passkey === PASSKEY || passkey === PASSKEY_2) {
       storage.setItem(STORAGE_KEY, 'true');
       setIsVerified(true);
     } else {

@@ -1,5 +1,6 @@
 export const STORAGE_KEY = 'stadtwerke_passkey_verified';
 export const PASSKEY = import.meta.env.VITE_PASS_KEY || '';
+export const PASSKEY_2 = import.meta.env.VITE_PASS_KEY_2 || '';
 
 /**
  * Storage utility that tries localStorage first, falls back to sessionStorage.
